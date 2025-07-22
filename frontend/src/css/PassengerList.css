@@ -1,0 +1,146 @@
+.passengers-card {
+  position: relative;
+  width: 90%;
+  max-width: 1200px;
+  margin: 30px auto;
+  padding: 30px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* Top Right Controls */
+.top-right-controls {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.filter-dropdown {
+  padding: 10px 15px;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  font-size: 14px;
+  background-color: #f9f9f9;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.filter-dropdown:hover {
+  border-color: #3498db;
+  background-color: #fff;
+}
+
+.export-btn {
+  padding: 10px 20px;
+  background-color: #27ae60;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.export-btn:hover {
+  background-color: #219653;
+  transform: translateY(-1px);
+}
+
+/* Heading */
+.passengers-heading {
+  margin: 0 0 25px 0;
+  color: #2c3e50;
+  font-size: 28px;
+  font-weight: 600;
+}
+
+/* Search Section */
+.search-container {
+  display: flex;
+  margin-bottom: 25px;
+  max-width: 600px;
+}
+
+.search-input {
+  flex: 1;
+  padding: 12px 15px;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px 0 0 6px;
+  font-size: 15px;
+  outline: none;
+  transition: border 0.2s;
+}
+
+.search-input:focus {
+  border-color: #3498db;
+}
+
+.search-btn {
+  padding: 12px 20px;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 0 6px 6px 0;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.search-btn:hover {
+  background-color: #2980b9;
+}
+
+/* Table Container */
+.table-container {
+  overflow-x: auto;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+/* Table Styles */
+.passengers-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 15px;
+}
+
+.passengers-table th {
+  background-color: #f5f7fa;
+  padding: 14px 16px;
+  text-align: left;
+  color: #4a5568;
+  font-weight: 600;
+  border-bottom: 2px solid #e2e8f0;
+}
+
+.passengers-table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid #edf2f7;
+  color: #2d3748;
+}
+
+.passengers-table tr:hover {
+  background-color: #f8fafc;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .passengers-card {
+    padding: 20px;
+  }
+  
+  .top-right-controls {
+    top: 20px;
+    right: 20px;
+  }
+  
+  .passengers-heading {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+}
