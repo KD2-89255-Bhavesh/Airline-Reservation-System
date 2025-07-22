@@ -1,0 +1,152 @@
+/* Card Container */
+.flight-card {
+  position: relative;
+  width: 90%;
+  max-width: 1400px;
+  margin: 30px auto;
+  padding: 25px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Top Right Button */
+.flight-action-btn {
+  position: absolute;
+  top: 25px;
+  right: 25px;
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.flight-action-btn:hover {
+  background-color: #3e8e41;
+  transform: translateY(-2px);
+}
+
+/* Heading */
+.flight-heading {
+  margin: 0 0 25px 0;
+  color: #2c3e50;
+  font-size: 28px;
+  font-weight: 600;
+}
+
+/* Search Section */
+.flight-search-container {
+  display: flex;
+  margin-bottom: 30px;
+  width: 100%;
+  max-width: 600px;
+}
+
+.flight-search-input {
+  flex: 1;
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px 0 0 5px;
+  font-size: 16px;
+  outline: none;
+  transition: border 0.3s;
+}
+
+.flight-search-input:focus {
+  border-color: #3498db;
+}
+
+.flight-search-btn {
+  padding: 12px 20px;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+.flight-search-btn:hover {
+  background-color: #2980b9;
+}
+
+/* Table Container */
+.flight-table-container {
+  overflow-x: auto;
+}
+
+/* Table Styles */
+.flight-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 15px;
+  margin-top: 20px;
+}
+
+.flight-table th {
+  background-color: #f8f9fa;
+  padding: 14px;
+  text-align: left;
+  border-bottom: 2px solid #dee2e6;
+  font-weight: 600;
+  color: #495057;
+}
+
+.flight-table td {
+  padding: 12px 14px;
+  border-bottom: 1px solid #e9ecef;
+  color: #212529;
+}
+
+.flight-table tr:hover {
+  background-color: #f8f9fa;
+}
+
+/* Action Buttons */
+.action-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.edit-btn, .schedule-btn, .remove-btn {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.edit-btn {
+  background-color: #ffc107;
+  color: #212529;
+}
+
+.edit-btn:hover {
+  background-color: #e0a800;
+}
+
+.schedule-btn {
+  background-color: #17a2b8;
+  color: white;
+}
+
+.schedule-btn:hover {
+  background-color: #138496;
+}
+
+.remove-btn {
+  background-color: #dc3545;
+  color: white;
+}
+
+.remove-btn:hover {
+  background-color: #c82333;
+}
