@@ -2,20 +2,14 @@ import React from 'react';
 import { Outlet } from 'react-router-dom';
 import HomeNavbar from '../components/HomeNavbar';
 import '../CSS/Home.css';
-import FlightSearch from './customer/FlightSearch';
-
-
 
 function Home() {
   return (
     <>
       <HomeNavbar />
       <main className='main-content'>
-        <Outlet />
+        <Outlet /> {/* This will render the matched child route component */}
       </main>
-<body>
-  
-</body>
 
       <footer className="footer">
         <div className="container">

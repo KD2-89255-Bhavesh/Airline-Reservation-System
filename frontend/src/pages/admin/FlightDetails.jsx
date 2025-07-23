@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import '../../css/FlightDetails.css';
 
-const FlightDashboard = () => {
+const FlightManagement = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [flights, setFlights] = useState([
     {
@@ -127,4 +127,4 @@ const FlightDashboard = () => {
   );
 };
 
-export default FlightDashboard;
+export default FlightManagement;

@@ -1,8 +1,17 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { FaPlane, FaMapMarkerAlt, FaCalendarAlt, FaUser, FaSearch } from 'react-icons/fa';
 import '../../CSS/FlightSearch.css';
 
 const FlightSearch = () => {
+
+const navigate = useNavigate()
+
+const flightList = () =>{
+    navigate("/flightlist")
+}
+
+
   return (
     <div className="hero-section">
       {/* Flight Booking Card */}
@@ -65,7 +74,9 @@ const FlightSearch = () => {
             </div>
           </div>
           
-          <button type="submit" className="search-btn">
+          <button 
+            onClick={flightList}
+            type="submit" className="search-btn">
             <FaSearch className="search-icon" />
             Search Flights
           </button>

@@ -1,8 +1,10 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { FaPlane, FaClock, FaChair } from 'react-icons/fa';
 import '../../CSS/FlightList.css';
 
 const FlightList = () => {
+  const navigate = useNavigate();
   // Dummy data for two flights
   const dummyFlights = [
     {
@@ -48,6 +50,13 @@ const FlightList = () => {
   const handleSelect = (flightNumber, classType) => {
     console.log(`Selected ${classType} class for flight ${flightNumber}`);
     // Add your booking logic here
+    navigate('/passenger-details', {
+      state: {
+        flightNumber,
+        classType,
+        flightDetails: dummyFlights.find(flight => flight.flightNumber === flightNumber)
+      }
+    });
   };
 
   return (

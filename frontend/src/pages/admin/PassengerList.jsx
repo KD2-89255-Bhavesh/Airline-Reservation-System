@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import '../../css/PassengerList.css';
 
-const PassengersDashboard = () => {
+const PassengerManagement = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [filter, setFilter] = useState('all');
   const [passengers, setPassengers] = useState([
@@ -113,4 +113,4 @@ const PassengersDashboard = () => {
   );
 };
 
-export default PassengersDashboard;
+export default PassengerManagement;
