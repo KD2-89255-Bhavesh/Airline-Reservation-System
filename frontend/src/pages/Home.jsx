@@ -9,19 +9,13 @@ import FlightSearch from './customer/FlightSearch';
 function Home() {
   return (
     <>
-      <HomeNavbar />
+     
       <main className='main-content'>
         <Outlet />
         <FlightSearch/>
       </main>
 
-      <footer className="footer">
-        <div className="container">
-          <div className="copyright">
-            <span>Copyright © sunbeam@2025</span>
-          </div>
-        </div>
-      </footer>
+      
     </>
   );
 }
