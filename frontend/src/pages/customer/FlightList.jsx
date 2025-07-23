@@ -1,6 +1,7 @@
 import React from 'react';
 import { FaPlane, FaClock, FaChair } from 'react-icons/fa';
 import '../../CSS/FlightList.css';
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const FlightList = () => {
   // Dummy data for two flights
