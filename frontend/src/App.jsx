@@ -13,8 +13,8 @@ function App() {
         <Route path="/" element={<Login />} />
         <Route path="/register" element={<Register />} />
       </Routes> */}
-      {/* <AirlineDashboard /> */}
-      {/* <FlightDashboard /> */}
+      <AirlineDashboard /> 
+      {/* <FlightDashboard />
       {/* <PassengersDashboard/> */}
     </>
   );
