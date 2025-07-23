@@ -1,18 +1,15 @@
-import React from 'react';
-import { Outlet } from 'react-router-dom';
-import HomeNavbar from '../components/HomeNavbar';
-import '../CSS/Home.css';
-import FlightSearch from './customer/FlightSearch';
+import React from 'react'
 
+import { Outlet } from "react-router-dom";
+import HomeNavbar from "../components/HomeNavbar";
 
-
-function Home() {
+function ContactUs() {
   return (
     <>
       <HomeNavbar />
       <main className='main-content'>
         <Outlet />
-        <FlightSearch/>
+        <h1>contact us</h1>
       </main>
 
       <footer className="footer">
@@ -23,7 +20,7 @@ function Home() {
         </div>
       </footer>
     </>
-  );
+  )
 }
 
-export default Home;
+export default ContactUs

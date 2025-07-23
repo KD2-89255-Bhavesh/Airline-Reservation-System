@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { toast } from "react-toastify";
 import { submitCustomerFeedBack } from "../../services/feedback";
-import { useNavigate } from 'react-router-dom';
-
-
+import { useNavigate } from "react-router-dom";
+import AdminNavbar from "../../components/AdminNavbar";
 
 function CustomerFeedback() {
   const [userId, setUserId] = useState("4");
@@ -39,69 +38,72 @@ function CustomerFeedback() {
   };
 
   return (
-    <div className="container mt-4">
-      <h2>Submit Feedback</h2>
-      <form className="mb-4">
-        <div className="row">
-          <div className="col-md-3">
-            <label>User ID</label>
-            <input
-              type="number"
-              name="user_id"
-              className="form-control"
-              value={userId}
-              disabled
-              readOnly
-            />
-          </div>
+    <>
+      <AdminNavbar />
+      <div className="container mt-4">
+        <h2>Submit Feedback</h2>
+        <form className="mb-4">
+          <div className="row">
+            <div className="col-md-3">
+              <label>User ID</label>
+              <input
+                type="number"
+                name="user_id"
+                className="form-control"
+                value={userId}
+                disabled
+                readOnly
+              />
+            </div>
 
-          <div className="col-md-3">
-            <label>Booking ID</label>
-            <input
-              type="number"
-              name="booking_id"
-              className="form-control"
-              value={bookingId}
-              disabled
-              readOnly
-            />
+            <div className="col-md-3">
+              <label>Booking ID</label>
+              <input
+                type="number"
+                name="booking_id"
+                className="form-control"
+                value={bookingId}
+                disabled
+                readOnly
+              />
+            </div>
+            <div className="col-md-2">
+              <label>Rating</label>
+              <select
+                name="rating"
+                className="form-control"
+                value={rating}
+                onChange={(e) => setRating(e.target.value)}
+                required
+              >
+                {[1, 2, 3, 4, 5].map((r) => (
+                  <option key={r} value={r}>
+                    {r}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className="col-md-4">
+              <label>Comments</label>
+              <input
+                type="text"
+                name="comments"
+                className="form-control"
+                value={comment}
+                onChange={(e) => setComment(e.target.value)}
+              />
+            </div>
           </div>
-          <div className="col-md-2">
-            <label>Rating</label>
-            <select
-              name="rating"
-              className="form-control"
-              value={rating}
-              onChange={(e) => setRating(e.target.value)}
-              required
-            >
-              {[1, 2, 3, 4, 5].map((r) => (
-                <option key={r} value={r}>
-                  {r}
-                </option>
-              ))}
-            </select>
-          </div>
-          <div className="col-md-4">
-            <label>Comments</label>
-            <input
-              type="text"
-              name="comments"
-              className="form-control"
-              value={comment}
-              onChange={(e) => setComment(e.target.value)}
-            />
-          </div>
-        </div>
-        <button
-          onClick={onFeedBack}
-          type="submit"
-          className="btn btn-primary mt-3"
-        >
-          Submit
-        </button>
-      </form>
-    </div>
+          <button
+            onClick={onFeedBack}
+            type="submit"
+            className="btn btn-primary mt-3"
+          >
+            Submit
+          </button>
+        </form>
+      </div>
+    </>
   );
 }
 

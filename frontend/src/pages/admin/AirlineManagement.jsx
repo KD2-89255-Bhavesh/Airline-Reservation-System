@@ -1,8 +1,10 @@
 
 import React, { useState } from 'react';
 import '../../css/AirlineManagement.css';
+import "bootstrap/dist/css/bootstrap.min.css";
+import AdminNavbar from './../../components/AdminNavbar';
 
-const AirlineDashboard = () => {
+const AirlineManagement = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [airlines, setAirlines] = useState([
     {
@@ -46,6 +48,8 @@ const AirlineDashboard = () => {
   };
 
   return (
+    <>
+    <AdminNavbar/>
     <div className="airline-card">
       {/* Top right button */}
       <button onClick={handleAddNew} className="add-new-btn">ADD NEW FLIGHT</button>
@@ -106,7 +110,8 @@ const AirlineDashboard = () => {
         </table>
       </div>
     </div>
+    </>
   );
 };
 
-export default AirlineDashboard;
+export default AirlineManagement;
