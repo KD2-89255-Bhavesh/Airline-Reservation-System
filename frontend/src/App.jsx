@@ -14,6 +14,11 @@ import FlightManagement from "./pages/admin/FlightManagement";
 import ScheduleFight from "./pages/admin/ScheduleFight";
 import PassengersList from "./pages/admin/PassengersList";
 import CustomerFeedback from './pages/feedback/CustomerFeedback';
+import Customer from "./feature/customer";
+import { ToastContainer } from "react-toastify";
+import Footer from "./components/footer";
+
+
 
 function App() {
   return (
@@ -29,7 +34,7 @@ function App() {
 
 
         //check the validation with the user is login or not
-        <Route path="/my-flights" element={<FlightList />} />
+        
 
 
 
@@ -38,10 +43,9 @@ function App() {
         <Route path="/flightmanagement" element={<FlightManagement/>}/>
         <Route path="/scheduleflight" element={<ScheduleFight/>}/>
         <Route path="/passengerslist" element={<PassengersList/>}/>
-        <Route path="/feedback" element={<CustomerFeedback/>}/>
-
-
-
+        <Route path="/feedback" element={<CustomerFeedback/>}/>\
+        
+        <Route path="/customer" element={<Customer/>}/>
 
       </Routes>
     </>
