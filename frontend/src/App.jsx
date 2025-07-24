@@ -23,7 +23,7 @@ import Footer from "./components/footer";
 function App() {
   return (
     <>
-      <Routes>
+      {/* <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/contactus" element={<ContactUs />} />
@@ -47,7 +47,10 @@ function App() {
         
         <Route path="/customer" element={<Customer/>}/>
 
-      </Routes>
+      </Routes> */}
+
+
+      <Customer />
     </>
   );
 }

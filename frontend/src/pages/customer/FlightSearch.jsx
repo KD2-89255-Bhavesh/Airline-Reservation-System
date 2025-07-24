@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaPlane, FaMapMarkerAlt, FaCalendarAlt, FaUser, FaSearch } from 'react-icons/fa';
+import { FaPlane, FaSearch } from 'react-icons/fa';
 import '../../CSS/FlightSearch.css';
 import { useNavigate } from 'react-router-dom';
 
@@ -27,7 +27,6 @@ const FlightSearch = () => {
         <form className="booking-form">
           <div className="form-row">
             <div className="form-group">
-              <FaMapMarkerAlt className="input-icon" />
               <div className="input-container">
                 <label>From</label>
                 <input 
@@ -39,7 +38,6 @@ const FlightSearch = () => {
             </div>
             
             <div className="form-group">
-              <FaMapMarkerAlt className="input-icon" />
               <div className="input-container">
                 <label>To</label>
                 <input 
@@ -51,28 +49,12 @@ const FlightSearch = () => {
             </div>
             
             <div className="form-group">
-              <FaCalendarAlt className="input-icon" />
               <div className="input-container">
                 <label>Departure Date</label>
                 <input 
                   type="date" 
                   className="booking-input"
                 />
-              </div>
-            </div>
-            
-            <div className="form-group">
-              <FaUser className="input-icon" />
-              <div className="input-container">
-                <label>Passengers</label>
-                <select className="booking-input">
-                  <option value="">Select passengers</option>
-                  <option value="1">1 Passenger</option>
-                  <option value="2">2 Passengers</option>
-                  <option value="3">3 Passengers</option>
-                  <option value="4">4 Passengers</option>
-                  <option value="4+">4+ Passengers</option>
-                </select>
               </div>
             </div>
           </div>
