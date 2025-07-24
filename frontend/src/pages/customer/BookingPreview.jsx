@@ -48,7 +48,7 @@ const BookingPreview = () => {
 
   return (
     <div className="booking-preview-page">
-      <HomeNavbar />
+      
       
       <div className="booking-preview-container">
         <h2>Booking Preview</h2>

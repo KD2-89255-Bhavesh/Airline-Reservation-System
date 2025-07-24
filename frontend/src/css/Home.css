@@ -20,3 +20,37 @@
 .copyright {
   font-size: 0.9rem;
 }
+/* Background styles */
+.main-background {
+  background-image: url("/images/background.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: calc(100vh - 120px); /* Adjust based on navbar/footer height */
+  width: 100%;
+  padding: 20px;
+}
+
+/* Optional overlay for better readability */
+.main-background::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.7); /* Adjust opacity as needed */
+  z-index: 0;
+}
+
+/* Ensure content appears above background */
+.main-background > * {
+  position: relative;
+  z-index: 1;
+}
+
+.customer-layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}

@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
-import HomeNavbar from '../../components/HomeNavbar';
 import '../../CSS/PassengerDetails.css';
 
 
@@ -33,7 +32,7 @@ const PassengerDetails = () => {
     e.preventDefault();
     // Handle form submission (e.g., API call, state update)
     console.log('Passenger details submitted:', passengers);
-    navigate('/payment'); // Navigate to payment page
+    navigate('/bookingpreview'); // 
   };
 
   const handleBack = () => {
@@ -42,7 +41,6 @@ const PassengerDetails = () => {
 
   return (
     <div className="passenger-details-page">
-      <HomeNavbar />
       
       <div className="passenger-details-container">
         <h2>Passenger Details</h2>
@@ -67,7 +65,6 @@ const PassengerDetails = () => {
                       <option value="Mrs">Mrs</option>
                       <option value="Ms">Ms</option>
                       <option value="Miss">Miss</option>
-                      <option value="Dr">Dr</option>
                     </select>
                   </div>
                   
@@ -136,7 +133,9 @@ const PassengerDetails = () => {
             <button type="button" className="back-button" onClick={handleBack}>
               Back
             </button>
-            <button type="submit" className="submit-button">
+            <button 
+            onClick={handleSubmit}
+            type="submit" className="submit-button">
               Submit
             </button>
           </div>

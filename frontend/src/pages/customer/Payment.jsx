@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import HomeNavbar from '../../components/HomeNavbar';
 import { FaCreditCard, FaLock, FaCheckCircle, FaRupeeSign } from 'react-icons/fa';
 import '../../CSS/Payment.css';
 
@@ -37,7 +36,7 @@ const Payment= () => {
       setIsProcessing(false);
       setIsSuccess(true);
       setTimeout(() => {
-        navigate('/confirmation');
+        navigate('/Ticketpage');
       }, 2000);
     }, 3000);
   };
@@ -49,7 +48,7 @@ const Payment= () => {
   if (isSuccess) {
     return (
       <div className="payment-page">
-        <HomeNavbar />
+  
         <div className="payment-success">
           <FaCheckCircle className="success-icon" />
           <h2>Payment Successful!</h2>
@@ -61,7 +60,7 @@ const Payment= () => {
 
   return (
     <div className="payment-page">
-      <HomeNavbar />
+
       
       <div className="payment-container">
         <h1>PAYMENT</h1>
@@ -185,7 +184,8 @@ const Payment= () => {
           </form>
         )}
         
-        <button type="button" className="back-button" onClick={handleBack}>
+        <button 
+        type="button" className="back-button" onClick={handleBack}>
           Back
         </button>
       </div>

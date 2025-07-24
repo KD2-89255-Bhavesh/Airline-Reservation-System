@@ -24,9 +24,7 @@ const TicketPage = () => {
   };
 
   return (
-    <div className="ticket-page">
-      <HomeNavbar />
-      
+    <div className="ticket-page"> 
       <div className="ticket-container">
         <div className="ticket-header">
           <FaCheckCircle className="success-icon" />
