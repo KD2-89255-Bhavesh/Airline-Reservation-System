@@ -9,7 +9,6 @@ import { FaPlane, FaChartLine, FaMoneyBillWave, FaClipboardList } from 'react-ic
 function AdminDashboard() {
   return (
     <div className="admin-layout">
-      <AdminNavbar />
       
       <div className="container-fluid p-4 dashboard-content">
         {/* Summary Cards Row - 4 cards in one row */}
