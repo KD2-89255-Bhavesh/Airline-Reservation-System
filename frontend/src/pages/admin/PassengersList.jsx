@@ -50,7 +50,6 @@ const PassengersList = () => {
 
   return (
     <>
-      <AdminNavbar />
       <div className="passengers-card">
         {/* Top right section with dropdown and export button */}
         <div className="top-right-controls">

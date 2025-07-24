@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import "../../css/FlightDetails.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import AdminNavbar from "../../components/AdminNavbar";
+import { useNavigate } from "react-router-dom";
+
 
 const FlightManagement = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -34,6 +36,12 @@ const FlightManagement = () => {
       dateAdded: "2023-04-10",
     },
   ]);
+  
+  const navigate = useNavigate()
+
+  const addNewFlight = () =>{
+    navigate("/addflight")
+  }
 
   const handleSearch = () => {
     console.log("Searching for:", searchTerm);
@@ -55,10 +63,11 @@ const FlightManagement = () => {
 
   return (
     <>
-      <AdminNavbar />
       <div className="flight-card">
         {/* Top right button */}
-        <button className="flight-action-btn">ADD NEW FLIGHT</button>
+        <button 
+        onClick={addNewFlight}
+        className="flight-action-btn">ADD NEW FLIGHT</button>
 
         {/* Heading */}
         <h1 className="flight-heading">Flight Details</h1>

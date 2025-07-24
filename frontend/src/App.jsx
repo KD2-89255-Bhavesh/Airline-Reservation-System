@@ -13,12 +13,11 @@ import AirlineManagement from "./pages/admin/AirlineManagement";
 import FlightManagement from "./pages/admin/FlightManagement";
 import ScheduleFight from "./pages/admin/ScheduleFight";
 import PassengersList from "./pages/admin/PassengersList";
-import CustomerFeedback from './pages/feedback/CustomerFeedback';
+import CustomerFeedback from "./pages/feedback/CustomerFeedback";
 import Customer from "./feature/customer";
 import { ToastContainer } from "react-toastify";
 import Footer from "./components/footer";
-
-
+import Admin from "./feature/Admin";
 
 function App() {
   return (
@@ -30,27 +29,9 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/adminlogin" element={<AdminLogin />} />
-
-
-
-        //check the validation with the user is login or not
-        
-
-
-
-        <Route path="/admindashboard" element={<AdminDashboard />} />
-        <Route path="/airlinemanagement" element={<AirlineManagement/>}/>
-        <Route path="/flightmanagement" element={<FlightManagement/>}/>
-        <Route path="/scheduleflight" element={<ScheduleFight/>}/>
-        <Route path="/passengerslist" element={<PassengersList/>}/>
-        <Route path="/feedback" element={<CustomerFeedback/>}/>\
-        
-        <Route path="/customer" element={<Customer/>}/>
-
-      </Routes> */}
-
-
-      <Customer />
+        {/* //check the validation with the user is login or not
+        <Route path="/passengerslist" element={<PassengersList />} />
+        <Route path="/feedback" element={<CustomerFeedback />} /> */}
     </>
   );
 }

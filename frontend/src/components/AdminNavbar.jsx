@@ -1,7 +1,16 @@
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import "bootstrap/dist/css/bootstrap.min.css";
 
+
 function AdminNavbar() {
+
+  const navigate = useNavigate()
+
+  const addscheduleflight = () =>{
+    navigate("/addscheduleflight")
+  }
+
+
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <div className="container-fluid">
@@ -61,8 +70,7 @@ function AdminNavbar() {
                 to="/scheduleflight" 
                 className={({ isActive }) => 
                   `nav-link ${isActive ? 'active' : ''}`
-                }
-              >
+                }>
                 Schedule Flight
               </NavLink>
             </li>
@@ -88,7 +96,6 @@ function AdminNavbar() {
             </li>
           </ul>
 
-          {/* Right-aligned items */}
           <ul className="navbar-nav ms-auto">
             <li className="nav-item">
               <NavLink 
