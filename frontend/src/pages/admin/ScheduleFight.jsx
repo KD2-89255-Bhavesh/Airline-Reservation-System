@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { Button, Table, Form, InputGroup } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import AdminNavbar from "../../components/AdminNavbar";
+import { useNavigate } from "react-router-dom";
+
 
 function ScheduleFight() {
   const [search, setSearch] = useState("");
@@ -91,13 +92,18 @@ function ScheduleFight() {
     flight.flightNo.toString().includes(search)
   );
 
+  const navigate = useNavigate()
+  const back = ()=>{
+    navigate("/addscheduleflight")
+  }
+
   return (
     <>
-      <AdminNavbar />
       <div className="container mt-4">
         <div className="d-flex justify-content-between align-items-center mb-3">
           <h3>Scheduled Flight Details</h3>
-          <Button variant="warning">✈ SCHEDULE FLIGHT</Button>
+          <Button variant="warning"
+          onClick={back}>✈ SCHEDULE FLIGHT</Button>
         </div>
 
         <InputGroup className="mb-3">
