@@ -10,6 +10,7 @@ import AddFlights from '../pages/admin/Addflight';
 import AddScheduleFlight from '../pages/admin/AddScheduleFlight';
 import AdminDashboard from '../pages/dashboards/AdminDashboard';
 import CustomerFeedback from '../pages/feedback/CustomerFeedback';
+import Profile from '../components/Profile';
 
 
 function Admin() {
@@ -31,6 +32,7 @@ function Admin() {
 
 
     </Routes>
+<Profile/>
     </>
   )
 }
