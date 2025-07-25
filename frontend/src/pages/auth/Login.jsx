@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { loginUser } from "../../services/user";
 import { toast } from 'react-toastify';
 import "bootstrap/dist/css/bootstrap.min.css";
+import "../../css/Login.css"
+
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -20,7 +22,7 @@ function Login() {
       } else {
         if (result["status"] == "success") {
           toast.success("Welcome to application");
-          navigate("/");
+          navigate("/home");
         } else {
           toast.error("Invalid email or password");
         }
