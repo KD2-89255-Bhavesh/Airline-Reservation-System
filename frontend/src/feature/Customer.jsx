@@ -9,6 +9,7 @@ import BookingPreview from './../pages/customer/BookingPreview';
 import Payment from "../pages/customer/Payment";
 import TicketPage from './../pages/customer/TicketPage';
 import "../CSS/Home.css"; // Make sure to import your CSS
+import Profile from "../components/Profile";
 
 function Customer() {
   return (
@@ -25,7 +26,7 @@ function Customer() {
           <Route path="/ticketpage" element={<TicketPage />}/>
         </Routes>
       </div>
-      
+<Profile/>
       {/* <Footer /> */}
     </div>
   );

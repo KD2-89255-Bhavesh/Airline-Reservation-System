@@ -18,6 +18,7 @@ import Customer from "./feature/customer";
 import { ToastContainer } from "react-toastify";
 import Footer from "./components/footer";
 import Admin from "./feature/Admin";
+import Profile from "./components/Profile";
 
 function App() {
   return (

@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { registerUser } from "../../services/user";
 import { toast } from "react-toastify";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "../../css/Register.css";
 
 function Register() {
   const [title, setTitle] = useState("Mr");
@@ -12,28 +13,25 @@ function Register() {
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [role, setRole] = useState("Applicant");
 
   const navigate = useNavigate();
 
-  const onBack = () => {
-    navigate(-1);
-  };
-
   const onRegister = async () => {
-    if (firstName.length == 0) {
-      toast.warn("please enter first name");
-    } else if (lastName.length == 0) {
-      toast.warn("please enter last name");
-    } else if (email.length == 0) {
-      toast.warn("please enter email");
-    } else if (phone.length == 0) {
-      toast.warn("please enter phone number");
-    } else if (password.length == 0) {
-      toast.warn("please enter password");
-    } else if (confirmPassword.length == 0) {
-      toast.warn("please confirm password");
-    } else if (password != confirmPassword) {
-      toast.warn("password does not match");
+    if (firstName.length === 0) {
+      toast.warn("Please enter first name");
+    } else if (lastName.length === 0) {
+      toast.warn("Please enter last name");
+    } else if (email.length === 0) {
+      toast.warn("Please enter email");
+    } else if (phone.length === 0) {
+      toast.warn("Please enter phone number");
+    } else if (password.length === 0) {
+      toast.warn("Please enter password");
+    } else if (confirmPassword.length === 0) {
+      toast.warn("Please confirm password");
+    } else if (password !== confirmPassword) {
+      toast.warn("Password does not match");
     } else {
       const result = await registerUser(
         title,
@@ -42,116 +40,107 @@ function Register() {
         email,
         phone,
         password,
+        role
       );
       if (!result) {
         toast.error("Error while registering the user");
       } else {
-        if (result["status"] == "success") {
-          toast.success("successfully registered a user");
+        if (result.status === "success") {
+          toast.success("Successfully registered");
           navigate("/");
         } else {
-          toast.error("Error while registering the user");
+          toast.error(result.message || "Error while registering the user");
         }
       }
     }
   };
 
   return (
-    <div className="container mt-4">
-      <h2>Register</h2>
-      <div className="form">
-        <div>
-          <label>Title</label>
-          <select
-            type="text"
-            className="form-control"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            required
-          >
-            <option value="">Select Title</option>
-            <option value="Mr">Mr</option>
-            <option value="Ms">Ms</option>
-            <option value="Dr">Dr</option>
-          </select>
-          <br />
-        </div>
-
-        <div className="mb-3">
-          <label>First Name</label>
-          <input
-            type="text"
-            className="form-control"
-            value={firstName}
-            onChange={(e) => setFirstName(e.target.value)}
-            required
-          />
-        </div>
-
-        <div className="mb-3">
-          <label>Last Name</label>
-          <input
-            type="text"
-            className="form-control"
-            value={lastName}
-            onChange={(e) => setLastName(e.target.value)}
-            required
-          />
-        </div>
-
-        <div className="mb-3">
-          <label>Email</label>
-          <input
-            type="email"
-            className="form-control"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </div>
-
-        <div className="mb-3">
-          <label>Phone</label>
-          <input
-            type="tel"
-            className="form-control"
-            value={phone}
-            onChange={(e) => setPhone(e.target.value)}
-            required
-          />
-        </div>
-
-        <div className="mb-3">
-          <label>Password</label>
-          <input
-            type="password"
-            className="form-control"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </div>
-
-        <div className="mb-3">
-          <label>Confirm Password</label>
-          <input
-            type="password"
-            className="form-control"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            required
-          />
-        </div>
-        <div className="mb-3">
-          <div className="mb-3">
-            Already have an account?{" "}
-            <button onClick={onBack} className="btn btn-link">
-              Login here
-            </button>
+    <div className="register-page">
+      <div className="register-container">
+        <h1 className="register-header">Signup</h1>
+        
+        <div className="register-form">
+          <div className="form-group">
+            <label>Title</label>
+            <select
+              className="form-control"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+            >
+              <option value="Mr">Mr</option>
+              <option value="Ms">Ms</option>
+              <option value="Dr">Dr</option>
+            </select>
           </div>
-          <button onClick={onRegister} className="btn btn-success">
-            Register
+
+          <div className="form-group">
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Enter your first name"
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
+            />
+          </div>
+
+          <div className="form-group">
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Enter your last name"
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
+            />
+          </div>
+
+          <div className="form-group">
+            <input
+              type="email"
+              className="form-control"
+              placeholder="Enter your email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
+
+          <div className="form-group">
+            <input
+              type="tel"
+              className="form-control"
+              placeholder="Enter mobile number"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+            />
+          </div>
+
+          <div className="form-group">
+            <input
+              type="password"
+              className="form-control"
+              placeholder="Create password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
+
+          <div className="form-group">
+            <input
+              type="password"
+              className="form-control"
+              placeholder="Confirm password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+            />
+          </div>
+
+          <button onClick={onRegister} className="signup-button">
+            Signup Now
           </button>
+
+          <div className="login-link">
+            Already have an account? <Link to="/">Login</Link>
+          </div>
         </div>
       </div>
     </div>
