@@ -3,6 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import HomeNavbar from '../../components/HomeNavbar';
 import { FaPlane, FaClock, FaUserFriends, FaMoneyBillWave } from 'react-icons/fa';
 import '../../CSS/BookingPreview.css';
+import "bootstrap/dist/css/bootstrap.min.css";
 
 
 const BookingPreview = () => {
@@ -47,7 +48,7 @@ const BookingPreview = () => {
 
   return (
     <div className="booking-preview-page">
-      <HomeNavbar />
+      
       
       <div className="booking-preview-container">
         <h2>Booking Preview</h2>

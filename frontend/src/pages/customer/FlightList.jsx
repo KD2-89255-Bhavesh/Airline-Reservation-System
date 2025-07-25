@@ -1,8 +1,12 @@
 import React from 'react';
 import { FaPlane, FaClock, FaChair } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
 import '../../CSS/FlightList.css';
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const FlightList = () => {
+  const navigate = useNavigate();
+
   // Dummy data for two flights
   const dummyFlights = [
     {
@@ -46,24 +50,45 @@ const FlightList = () => {
   ];
 
   const handleSelect = (flightNumber, classType) => {
-    console.log(`Selected ${classType} class for flight ${flightNumber}`);
-    // Add your booking logic here
+    const selectedFlight = dummyFlights.find(flight => flight.flightNumber === flightNumber);
+    
+    if (!selectedFlight) {
+      console.error('Flight not found');
+      return;
+    }
+
+    navigate('/passengerdetails', {
+      state: {
+        flightInfo: {
+          flightNumber: selectedFlight.flightNumber,
+          airline: selectedFlight.airline,
+          route: `${selectedFlight.source} to ${selectedFlight.destination}`,
+          departureTime: selectedFlight.departureTime,
+          arrivalTime: selectedFlight.arrivalTime,
+          duration: selectedFlight.duration,
+          classType: classType,
+          price: selectedFlight.prices[classType.toLowerCase()],
+          seatsAvailable: selectedFlight.seatsAvailable[classType.toLowerCase()]
+        },
+        passengerCount: 1 // Default value, can be dynamic
+      }
+    });
   };
 
   return (
-    <div className="compact-flight-list">
-      <h2>Available Flights ({dummyFlights.length})</h2>
+    <div className="compact-flight-list container mt-4">
+      <h2 className="mb-4">Available Flights ({dummyFlights.length})</h2>
       
       <div className="compact-flights-container">
         {dummyFlights.map((flight, index) => (
-          <div key={index} className="compact-flight-card">
-            <div className="compact-flight-header">
+          <div key={index} className="compact-flight-card card mb-4">
+            <div className="compact-flight-header card-header">
               <FaPlane className="compact-flight-icon" />
               <span className="compact-flight-number">{flight.flightNumber}</span>
               <span className="compact-airline">{flight.airline}</span>
             </div>
             
-            <div className="compact-route-info">
+            <div className="compact-route-info card-body">
               <div className="compact-route-section">
                 <span className="compact-city">{flight.source}</span>
                 <span className="compact-time">{flight.departureTime}</span>
@@ -83,20 +108,22 @@ const FlightList = () => {
               </div>
             </div>
             
-            <div className="compact-class-options">
+            <div className="compact-class-options card-footer">
               <div className="compact-class-option">
                 <div className="compact-class-info">
                   <FaChair className="compact-class-icon economy" />
                   <div>
                     <span className="compact-class-name">Economy</span>
                     <span className="compact-price">${flight.prices.economy}</span>
+                    <small className="text-muted d-block">{flight.seatsAvailable.economy} seats left</small>
                   </div>
                 </div>
                 <button 
-                  className="compact-select-btn"
+                  className="compact-select-btn btn btn-primary"
                   onClick={() => handleSelect(flight.flightNumber, 'economy')}
+                  disabled={flight.seatsAvailable.economy <= 0}
                 >
-                  Select
+                  {flight.seatsAvailable.economy > 0 ? 'Select' : 'Sold Out'}
                 </button>
               </div>
               
@@ -106,13 +133,15 @@ const FlightList = () => {
                   <div>
                     <span className="compact-class-name">Business</span>
                     <span className="compact-price">${flight.prices.business}</span>
+                    <small className="text-muted d-block">{flight.seatsAvailable.business} seats left</small>
                   </div>
                 </div>
                 <button 
-                  className="compact-select-btn"
+                  className="compact-select-btn btn btn-primary"
                   onClick={() => handleSelect(flight.flightNumber, 'business')}
+                  disabled={flight.seatsAvailable.business <= 0}
                 >
-                  Select
+                  {flight.seatsAvailable.business > 0 ? 'Select' : 'Sold Out'}
                 </button>
               </div>
               
@@ -122,13 +151,15 @@ const FlightList = () => {
                   <div>
                     <span className="compact-class-name">First</span>
                     <span className="compact-price">${flight.prices.firstClass}</span>
+                    <small className="text-muted d-block">{flight.seatsAvailable.firstClass} seats left</small>
                   </div>
                 </div>
                 <button 
-                  className="compact-select-btn"
+                  className="compact-select-btn btn btn-primary"
                   onClick={() => handleSelect(flight.flightNumber, 'firstClass')}
+                  disabled={flight.seatsAvailable.firstClass <= 0}
                 >
-                  Select
+                  {flight.seatsAvailable.firstClass > 0 ? 'Select' : 'Sold Out'}
                 </button>
               </div>
             </div>

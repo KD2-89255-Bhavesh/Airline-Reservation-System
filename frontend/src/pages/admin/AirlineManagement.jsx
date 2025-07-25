@@ -1,8 +1,12 @@
 
 import React, { useState } from 'react';
 import '../../css/AirlineManagement.css';
+import "bootstrap/dist/css/bootstrap.min.css";
+import AdminNavbar from './../../components/AdminNavbar';
+import { useNavigate } from 'react-router-dom';
 
-const AirlineDashboard = () => {
+
+const AirlineManagement = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [airlines, setAirlines] = useState([
     {
@@ -35,20 +39,22 @@ const AirlineDashboard = () => {
     // Edit logic would go here
   };
 
+  const navigate = useNavigate()
+
   const handleDelete = (id) => {
     console.log('Delete airline with id:', id);
     setAirlines(airlines.filter(airline => airline.id !== id));
   };
 
   const handleAddNew = () => {
-    console.log('Add new airline clicked');
-    // Add new airline logic would go here
+    navigate("/addairline")
   };
 
   return (
+    <>
     <div className="airline-card">
       {/* Top right button */}
-      <button onClick={handleAddNew} className="add-new-btn">ADD NEW FLIGHT</button>
+      <button onClick={handleAddNew} className="add-new-btn">ADD NEW AIRLINE</button>
       
       {/* Heading */}
       <h1 className="airline-heading">Airline Details</h1>
@@ -106,7 +112,8 @@ const AirlineDashboard = () => {
         </table>
       </div>
     </div>
+    </>
   );
 };
 
-export default AirlineDashboard;
+export default AirlineManagement;

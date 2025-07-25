@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../CSS/HomeNavbar.css';
 import { FaBars, FaTimes } from 'react-icons/fa';
-
+import "bootstrap/dist/css/bootstrap.min.css";
 
 
 const HomeNavbar = () => {
@@ -33,12 +33,18 @@ const HomeNavbar = () => {
         <Link to="/" className="nav-link" onClick={() => setIsMenuOpen(false)}>Home</Link>
         <Link to="/my-flights" className="nav-link" onClick={() => setIsMenuOpen(false)}>My Flights</Link>
         <Link to="/about" className="nav-link" onClick={() => setIsMenuOpen(false)}>About</Link>
-        <Link to="/feedback" className="nav-link" onClick={() => setIsMenuOpen(false)}>Feedback</Link>
+        <Link to="/contactus" className="nav-link" onClick={() => setIsMenuOpen(false)}>Contact us</Link>
+      </div>
+
+
+      <div className="auth-section">
+        <Link to="/adminlogin" className="login-btn">Admin</Link>
       </div>
 
       <div className="auth-section">
         <Link to="/login" className="login-btn">Login</Link>
       </div>
+
     </nav>
   );
 };
