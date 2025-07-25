@@ -26,7 +26,7 @@ function Customer() {
           <Route path="/ticketpage" element={<TicketPage />}/>
         </Routes>
       </div>
-      <Profile/>
+<Profile/>
       {/* <Footer /> */}
     </div>
   );
