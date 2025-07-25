@@ -1,15 +1,15 @@
-import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import '../../CSS/PassengerDetails.css';
-
+import { submitPassengerDetails } from '../../services/customerService/flightSearchService';
 
 const PassengerDetails = () => {
   const navigate = useNavigate();
-  
-  // Get passenger count from URL params or state management
-  // For demo, we'll use 2 passengers
-  const passengerCount = 2;
-  
+  const location = useLocation();
+
+  const flightInfo = location.state?.flightInfo;
+  const passengerCount = location.state?.passengerCount || 1;
+
   const [passengers, setPassengers] = useState(
     Array(passengerCount).fill().map((_, i) => ({
       id: i + 1,
@@ -28,34 +28,49 @@ const PassengerDetails = () => {
     setPassengers(updatedPassengers);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission (e.g., API call, state update)
-    console.log('Passenger details submitted:', passengers);
-    navigate('/bookingpreview'); // 
+
+    try {
+      const response = await submitPassengerDetails(
+        flightInfo.flightNumber,
+        flightInfo.classType,
+        passengers
+      );
+
+      console.log('Booking success:', response);
+      navigate('/bookingpreview', {
+        state: {
+          bookingConfirmation: response,
+          flightInfo,
+          passengers,
+        },
+      });
+    } catch (error) {
+      alert("Failed to submit booking.");
+    }
   };
 
   const handleBack = () => {
-    navigate(-1); // Go back to previous page
+    navigate(-1);
   };
 
   return (
     <div className="passenger-details-page">
-      
       <div className="passenger-details-container">
         <h2>Passenger Details</h2>
         <p>Please enter details for all passengers</p>
-        
+
         <form onSubmit={handleSubmit}>
           <div className="passenger-cards-container">
             {passengers.map((passenger, index) => (
               <div key={passenger.id} className="passenger-card">
                 <div className="passenger-number">Passenger {index + 1}</div>
-                
+
                 <div className="passenger-form-row">
                   <div className="form-group">
                     <label>Title</label>
-                    <select 
+                    <select
                       value={passenger.title}
                       onChange={(e) => handleInputChange(index, 'title', e.target.value)}
                       required
@@ -67,7 +82,7 @@ const PassengerDetails = () => {
                       <option value="Miss">Miss</option>
                     </select>
                   </div>
-                  
+
                   <div className="form-group">
                     <label>First Name</label>
                     <input
@@ -77,7 +92,7 @@ const PassengerDetails = () => {
                       required
                     />
                   </div>
-                  
+
                   <div className="form-group">
                     <label>Last Name</label>
                     <input
@@ -88,7 +103,7 @@ const PassengerDetails = () => {
                     />
                   </div>
                 </div>
-                
+
                 <div className="passenger-form-row">
                   <div className="form-group">
                     <label>Mobile Number</label>
@@ -99,7 +114,7 @@ const PassengerDetails = () => {
                       required
                     />
                   </div>
-                  
+
                   <div className="form-group">
                     <label>Date of Birth</label>
                     <input
@@ -109,10 +124,10 @@ const PassengerDetails = () => {
                       required
                     />
                   </div>
-                  
+
                   <div className="form-group">
                     <label>Gender</label>
-                    <select 
+                    <select
                       value={passenger.gender}
                       onChange={(e) => handleInputChange(index, 'gender', e.target.value)}
                       required
@@ -128,14 +143,12 @@ const PassengerDetails = () => {
               </div>
             ))}
           </div>
-          
+
           <div className="passenger-form-buttons">
             <button type="button" className="back-button" onClick={handleBack}>
               Back
             </button>
-            <button 
-            onClick={handleSubmit}
-            type="submit" className="submit-button">
+            <button type="submit" className="submit-button">
               Submit
             </button>
           </div>
