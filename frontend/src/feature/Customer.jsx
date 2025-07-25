@@ -9,7 +9,10 @@ import BookingPreview from './../pages/customer/BookingPreview';
 import Payment from "../pages/customer/Payment";
 import TicketPage from './../pages/customer/TicketPage';
 import "../CSS/Home.css"; // Make sure to import your CSS
-import Profile from "../components/Profile";
+
+import Register from './../pages/auth/Register';
+import Login from './../pages/auth/Login';
+
 
 function Customer() {
   return (
@@ -18,7 +21,9 @@ function Customer() {
       
       <div className="main-background">
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Login/>}/>
+          <Route path="/register" element={<Register />}/>
+          <Route path="/home" element={<Home />} />
           <Route path="/flightlist" element={<FlightList />} />
           <Route path="/passengerdetails" element={<PassengerDetails />}/>
           <Route path="/bookingpreview" element={<BookingPreview />}/>
@@ -26,7 +31,6 @@ function Customer() {
           <Route path="/ticketpage" element={<TicketPage />}/>
         </Routes>
       </div>
-<Profile/>
       {/* <Footer /> */}
     </div>
   );

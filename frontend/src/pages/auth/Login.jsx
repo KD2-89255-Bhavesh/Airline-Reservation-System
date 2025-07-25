@@ -12,23 +12,41 @@ function Login() {
   const navigate = useNavigate();
 
   const onLogin = async () => {
-    if (email.length === 0) {
-      toast.warn("Please enter email");
-    } else if (password.length === 0) {
-      toast.warn("Please enter password");
-    } else {
-      const result = await loginUser(email, password);
-      if (!result) {
-        toast.error("Error while login");
-      } else {
-        if (result["status"] === "success") {
-          toast.success("Welcome to application");
-          navigate("/");
-        } else {
-          toast.error("Invalid email or password");
-        }
-      }
-    }
+ // if (email.length === 0) {
+    //   toast.warn("Please enter email");
+    // } else if (password.length === 0) {
+    //   toast.warn("Please enter password");
+    // } else {
+    //   const result = await loginUser(email, password);
+    //   if (!result) {
+    //     toast.error("Error while login");
+    //   } else {
+    //     if (result["status"] === "success") {
+    //       toast.success("Welcome to application");
+    //       navigate("/home");
+    //     } else {
+    //       toast.error("Invalid email or password");
+    //     }
+    //   }
+    // }
+    navigate("/home");
+//     if (email.length === 0) {
+//       toast.warn("Please enter email");
+//     } else if (password.length === 0) {
+//       toast.warn("Please enter password");
+//     } else {
+//       const result = await loginUser(email, password);
+//       if (!result) {
+//         toast.error("Error while login");
+//       } else {
+//         if (result["status"] === "success") {
+//           toast.success("Welcome to application");
+//           navigate("/");
+//         } else {
+//           toast.error("Invalid email or password");
+//         }
+//       }
+//     }
   };
 
   return (

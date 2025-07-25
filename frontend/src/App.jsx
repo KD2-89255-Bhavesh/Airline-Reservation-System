@@ -33,7 +33,9 @@ function App() {
         <Route path="/adminlogin" element={<AdminLogin />} />
         //check the validation with the user is login or not
         <Route path="/passengerslist" element={<PassengersList />} />
-        </Routes>
+          <Route path="/feedback" element={<CustomerFeedback />} /> */}
+        <Customer />
+       </Routes>
     </>
   );
 }
