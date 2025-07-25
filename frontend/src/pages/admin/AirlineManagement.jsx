@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import '../../css/AirlineManagement.css';
 
-const AirlineDashboard = () => {
+const AirlineManagement = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [airlines, setAirlines] = useState([
     {
@@ -48,7 +48,9 @@ const AirlineDashboard = () => {
   return (
     <div className="airline-card">
       {/* Top right button */}
-      <button onClick={handleAddNew} className="add-new-btn">ADD NEW FLIGHT</button>
+      <button onClick={handleAddNew} className="add-new-btn">ADD NEW FLIGHT
+        
+      </button>
       
       {/* Heading */}
       <h1 className="airline-heading">Airline Details</h1>
@@ -109,4 +111,4 @@ const AirlineDashboard = () => {
   );
 };
 
-export default AirlineDashboard;
+export default AirlineManagement;
