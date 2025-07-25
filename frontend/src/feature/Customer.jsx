@@ -8,7 +8,7 @@ import PassengerDetails from './../pages/customer/PassengerDetails';
 import BookingPreview from './../pages/customer/BookingPreview';
 import Payment from "../pages/customer/Payment";
 import TicketPage from './../pages/customer/TicketPage';
-import "../CSS/Home.css"; // Make sure to import your CSS
+import "../CSS/Home.css"; 
 
 function Customer() {
   return (

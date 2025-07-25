@@ -3,8 +3,12 @@ import { Link } from "react-router-dom";
 import { loginUser } from "../../services/user";
 import { toast } from 'react-toastify';
 import "bootstrap/dist/css/bootstrap.min.css";
+import { AuthContext } from "react-bootstrap/esm/AccordionContext";
 
 function Login() {
+
+  const { setUser } = useContext(AuthContext)
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -19,6 +23,7 @@ function Login() {
         toast.error("Error while login");
       } else {
         if (result["status"] == "success") {
+
           toast.success("Welcome to application");
           navigate("/");
         } else {
