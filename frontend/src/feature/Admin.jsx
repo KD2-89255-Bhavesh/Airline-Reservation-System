@@ -32,7 +32,7 @@ function Admin() {
 
 
     </Routes>
-    <Profile/>
+<Profile/>
     </>
   )
 }
