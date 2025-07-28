@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { Container, Row, Col, Form, Button, Card, ListGroup, Alert } from 'react-bootstrap';
 import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaClock, FaHeadset, FaPaperPlane } from 'react-icons/fa';
 import { motion } from 'framer-motion';
-import '../css/ContactUs.css'; // Custom CSS for additional styling
+import '../css/ContactUs.css'; 
 
 const ContactUs = () => {
   const [formData, setFormData] = useState({

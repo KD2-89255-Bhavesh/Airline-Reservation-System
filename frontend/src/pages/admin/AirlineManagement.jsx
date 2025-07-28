@@ -47,7 +47,7 @@ const AirlineManagement = () => {
   };
 
   const handleAddNew = () => {
-    navigate("/addairline")
+    navigate("/admin/addairline")
   };
 
   return (
