@@ -13,6 +13,7 @@ function Login() {
   const navigate = useNavigate();
 
   const onLogin = async () => {
+
  // if (email.length === 0) {
     //   toast.warn("Please enter email");
     // } else if (password.length === 0) {
@@ -48,6 +49,7 @@ function Login() {
 //         }
 //       }
 //     }
+
   };
 
   return (
