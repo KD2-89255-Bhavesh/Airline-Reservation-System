@@ -40,7 +40,7 @@ const FlightManagement = () => {
   const navigate = useNavigate()
 
   const addNewFlight = () =>{
-    navigate("/addflight")
+    navigate("/addscheduleflight")
   }
 
   const handleSearch = () => {
