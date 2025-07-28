@@ -16,10 +16,8 @@ import Login from './../pages/auth/Login';
 
 function Customer() {
   return (
-    <div className="customer-layout">
-      <HomeNavbar />
-      
-      <div className="main-background">
+    <>
+       <HomeNavbar />
         <Routes>
           <Route path="/" element={<Login/>}/>
           <Route path="/register" element={<Register />}/>
@@ -30,9 +28,7 @@ function Customer() {
           <Route path="/payment" element={<Payment/>}/>
           <Route path="/ticketpage" element={<TicketPage />}/>
         </Routes>
-      </div>
-      {/* <Footer /> */}
-    </div>
+    </>
   );
 }
 

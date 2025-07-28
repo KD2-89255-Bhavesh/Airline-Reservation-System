@@ -20,7 +20,7 @@ function Admin() {
     <AdminNavbar/>
     <Routes>
 
-        <Route path='/admindashboard' element={<AdminDashboard/>}/>
+        <Route path='/adminlogin' element={<AdminDashboard/>}/>
         <Route path='/scheduleflight' element={<ScheduleFight/>}/>
         <Route path='/airlinemanagement' element={<AirlineManagement/>}/>
         <Route path='/flightmanagement' element={<FlightManagement/>}/>
@@ -29,10 +29,7 @@ function Admin() {
         <Route path='/addflight' element={<AddFlights/>}/>
         <Route path='/addscheduleflight' element={<AddScheduleFlight/>}/>
         <Route path='/feedback' element={<CustomerFeedback/>}/>
-
-
     </Routes>
-<Profile/>
     </>
   )
 }
