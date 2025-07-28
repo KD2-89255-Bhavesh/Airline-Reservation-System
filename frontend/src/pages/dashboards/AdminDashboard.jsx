@@ -3,7 +3,7 @@ import { Outlet } from 'react-router-dom';
 import AdminNavbar from '../../components/AdminNavbar';
 import '../../CSS/AdminNavbar.css';
 import '../../CSS/AdminDashboard.css'
-import { FaPlane, FaChartLine, FaMoneyBillWave, FaClipboardList } from 'react-icons/fa'; // Import icons
+import { FaPlane, FaChartLine, FaMoneyBillWave, FaClipboardList } from 'react-icons/fa'; 
 
 
 function AdminDashboard() {
