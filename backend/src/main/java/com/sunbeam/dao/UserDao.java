@@ -2,13 +2,17 @@ package com.sunbeam.dao;
 
 import java.util.Optional;
 
+
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.sunbeam.entities.Customer;
+import com.sunbeam.entities.ScheduleFlight;
+import com.sunbeam.entities.User;
 
 
 @Repository
-public interface CustomerDao extends JpaRepository<Customer, Long>{
-	Optional<Customer> findByEmail(String email);
+public interface UserDao extends JpaRepository<User, Long>{
+	Optional<User> findByEmail(String email);
+	Optional<ScheduleFlight> findBySourceAndDestinationAndDeparture(String source,String destination,String departure);
 }

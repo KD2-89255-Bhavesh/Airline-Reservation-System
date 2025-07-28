@@ -5,17 +5,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sunbeam.dao.CustomerDao;
+import com.sunbeam.dao.UserDao;
 import com.sunbeam.dto.CustomerDto;
 import com.sunbeam.entities.Customer;
+import com.sunbeam.entities.User;
 
 @Service
-public class CustomerService {
+public class UserService {
 	
 	@Autowired
-	private CustomerDao customerDao;
+	private UserDao userDao;
 	
 	
-	public Customer register(CustomerDto data) {
+	public User register(CustomerDto data) {
 		Customer customer = new Customer();
 		
 		customer.setTitle(data.getTitle());
