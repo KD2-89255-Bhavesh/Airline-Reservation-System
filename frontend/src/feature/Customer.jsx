@@ -18,6 +18,17 @@ import ContactUs from "../components/ContactUs";
 function Customer() {
   return (
     <>
+       <HomeNavbar />
+        <Routes>
+          <Route path="/" element={<Login/>}/>
+          <Route path="/register" element={<Register />}/>
+          <Route path="/home" element={<Home />} />
+          <Route path="/flightlist" element={<FlightList />} />
+          <Route path="/passengerdetails" element={<PassengerDetails />}/>
+          <Route path="/bookingpreview" element={<BookingPreview />}/>
+          <Route path="/payment" element={<Payment/>}/>
+          <Route path="/ticketpage" element={<TicketPage />}/>
+        </Routes>
     </>
   );
 }

@@ -28,9 +28,11 @@ import AdminNavbar from "./components/AdminNavbar";
 import AdminLayout from './pages/admin/AdminLayout';
 import CustomerFeedback from './pages/feedback/CustomerFeedback';
 
+
 function App() {
   return (
     <>
+
       <Routes>
         {/* Public/Home Pages */}
         <Route path="/" element={<Home />} />
@@ -71,6 +73,7 @@ function App() {
         </Route>
       </Routes>
       <ToastContainer />
+
     </>
   );
 }

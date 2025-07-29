@@ -16,8 +16,22 @@ import Home from "./../pages/Home";
 function Admin() {
   return (
     <>
-     </>
-  );
+    <AdminNavbar/>
+    <Routes>
+
+        <Route path='/adminlogin' element={<AdminDashboard/>}/>
+        <Route path='/scheduleflight' element={<ScheduleFight/>}/>
+        <Route path='/airlinemanagement' element={<AirlineManagement/>}/>
+        <Route path='/flightmanagement' element={<FlightManagement/>}/>
+        <Route path='/passengerslist' element={<PassengersList/>}/>
+        <Route path='/addairline' element={<AddAirline/>}/>
+        <Route path='/addflight' element={<AddFlights/>}/>
+        <Route path='/addscheduleflight' element={<AddScheduleFlight/>}/>
+        <Route path='/feedback' element={<CustomerFeedback/>}/>
+    </Routes>
+    </>
+  )
+
 }
 
 export default Admin;
