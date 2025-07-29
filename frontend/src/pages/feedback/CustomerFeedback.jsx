@@ -1,8 +1,8 @@
+
 import React, { useState } from "react";
 import { toast } from "react-toastify";
 import { submitCustomerFeedBack } from "../../services/feedback";
 import { useNavigate } from "react-router-dom";
-import AdminNavbar from "../../components/AdminNavbar";
 
 function CustomerFeedback() {
   const [userId, setUserId] = useState("4");
@@ -39,7 +39,6 @@ function CustomerFeedback() {
 
   return (
     <>
-      <AdminNavbar />
       <div className="container mt-4">
         <h2>Submit Feedback</h2>
         <form className="mb-4">
@@ -108,3 +107,5 @@ function CustomerFeedback() {
 }
 
 export default CustomerFeedback;
+
+

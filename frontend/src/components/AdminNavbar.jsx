@@ -1,3 +1,4 @@
+
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -7,7 +8,7 @@ function AdminNavbar() {
   const navigate = useNavigate()
 
   const addscheduleflight = () =>{
-    navigate("/addscheduleflight")
+    navigate("/admin/addscheduleflight")
   }
 
 
@@ -37,7 +38,7 @@ function AdminNavbar() {
           <ul className="navbar-nav me-auto">
             <li className="nav-item">
               <NavLink 
-                to="/admindashboard" 
+                to="/admin/admindashboard" 
                 className={({ isActive }) => 
                   `nav-link ${isActive ? 'active' : ''}`
                 }
@@ -47,7 +48,7 @@ function AdminNavbar() {
             </li>
             <li className="nav-item">
               <NavLink 
-                to="/airlinemanagement" 
+                to="/admin/airlinemanagement" 
                 className={({ isActive }) => 
                   `nav-link ${isActive ? 'active' : ''}`
                 }
@@ -57,7 +58,7 @@ function AdminNavbar() {
             </li>
             <li className="nav-item">
               <NavLink 
-                to="/flightmanagement" 
+                to="/admin/flightmanagement" 
                 className={({ isActive }) => 
                   `nav-link ${isActive ? 'active' : ''}`
                 }
@@ -67,7 +68,7 @@ function AdminNavbar() {
             </li>
             <li className="nav-item">
               <NavLink 
-                to="/scheduleflight" 
+                to="/admin/scheduleflight" 
                 className={({ isActive }) => 
                   `nav-link ${isActive ? 'active' : ''}`
                 }>
@@ -76,7 +77,7 @@ function AdminNavbar() {
             </li>
             <li className="nav-item">
               <NavLink 
-                to="/passengerslist" 
+                to="/admin/passengerslist" 
                 className={({ isActive }) => 
                   `nav-link ${isActive ? 'active' : ''}`
                 }
@@ -86,7 +87,7 @@ function AdminNavbar() {
             </li>
             <li className="nav-item">
               <NavLink 
-                to="/feedback" 
+                to="/admin/feedback" 
                 className={({ isActive }) => 
                   `nav-link ${isActive ? 'active' : ''}`
                 }
@@ -125,3 +126,5 @@ function AdminNavbar() {
 }
 
 export default AdminNavbar;
+
+
