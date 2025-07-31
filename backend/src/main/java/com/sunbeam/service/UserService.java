@@ -1,14 +1,11 @@
-package com.sunbeam.service;
-
-
-import org.springframework.beans.factory.annotation.Autowired;
+package com.sunbeam.service;import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.sunbeam.dao.CustomerDao;
 import com.sunbeam.dao.UserDao;
-import com.sunbeam.dto.CustomerDto;
-import com.sunbeam.entities.Customer;
+import com.sunbeam.dto.UserDTO;
+import com.sunbeam.entities.Role;
 import com.sunbeam.entities.User;
+
 
 @Service
 public class UserService {
@@ -17,23 +14,23 @@ public class UserService {
 	private UserDao userDao;
 	
 	
-	public User register(CustomerDto data) {
-		Customer customer = new Customer();
+	public User register(UserDTO data) {
+		User customer = new User();
 		
 		customer.setTitle(data.getTitle());
 		customer.setFirstName(data.getFirstName());
 		customer.setLastName(data.getLastName());
 		customer.setEmail(data.getEmail());
-		customer.setPasswordHash(data.getPassword()); 
+		customer.setPasswordHash(data.getPasswordHash()); 
 		customer.setMobileNo(data.getMobileNo());
-		customer.setRole("customer");
-        return customerDao.save(customer);
+		customer.setRole(data.getRole());
+        return userDao.save(customer);
 		
 	}
 	
 	
-	public Customer login(String email, String password) {
-        return customerDao.findByEmail(email)
+	public User login(String email, String password) {
+        return userDao.findByEmail(email)
                 .filter(u -> u.getPasswordHash().equals(password))
                 .orElseThrow(() -> new RuntimeException("Invalid credentials"));
     }

@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { config } from './../../config';
+import { config } from '../../../config';
 
 export async function registerUser(
   title,
@@ -17,7 +17,8 @@ export async function registerUser(
       lastName,
       email,
       phone,
-      password
+      password,
+      role
     }
     const response = await axios.post(url, body)
 
@@ -32,7 +33,7 @@ export async function registerUser(
 }
 
 
-export async function loginUser(email, password) {
+export async function login(email, password) {
   try {
     const url = `${config.serverURL}/customer/login`
     const body = {
@@ -49,3 +50,6 @@ export async function loginUser(email, password) {
     console.log(`exception: `, ex)
   }
 }
+
+
+
