@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { registerUser } from "../../services/user";
+import { registerUser } from "../../services/auth/user";
 import { toast } from "react-toastify";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../../css/Register.css";
@@ -46,6 +46,7 @@ function Register() {
         toast.error("Error while registering the user");
       } else {
         if (result.status === "success") {
+          setRole("USER");
           toast.success("Successfully registered");
           navigate("/");
         } else {

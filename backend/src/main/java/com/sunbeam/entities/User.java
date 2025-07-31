@@ -4,6 +4,8 @@ package com.sunbeam.entities;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -55,18 +57,23 @@ public class User {
 	private Role role;
 	
 	@OneToMany(mappedBy="admin", cascade=CascadeType.ALL)
+	@JsonIgnore
 	private List<AirlineDetail> managedAirlines = new ArrayList<>();
 	
 	@OneToMany(mappedBy = "admin", cascade = CascadeType.ALL)
+	@JsonIgnore
     private List<AddFlights> managedFlights = new ArrayList<>();
     
     @OneToMany(mappedBy = "admin", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<ScheduleFlight> scheduledFlights = new ArrayList<>();
     
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Booking> bookings = new ArrayList<>();
     
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Feedback> feedbacks = new ArrayList<>();
 	
 

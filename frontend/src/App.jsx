@@ -1,6 +1,6 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import "./App.css";
-import Login from "./pages/auth/Login";
+import Login from "./pages/customer/auth/Login";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Home from "./pages/Home";
 import AdminDashboard from "./pages/dashboards/AdminDashboard";
@@ -8,7 +8,6 @@ import Register from "./pages/auth/Register";
 import About from "./components/About";
 import ContactUs from "./components/ContactUs";
 import FlightList from "./pages/customer/FlightList";
-import AdminLogin from "./pages/admin/AdminLogin";
 import AirlineManagement from "./pages/admin/AirlineManagement";
 import FlightManagement from "./pages/admin/FlightManagement";
 import ScheduleFight from "./pages/admin/ScheduleFight";
@@ -27,6 +26,7 @@ import FlightSearch from "./pages/customer/FlightSearch";
 import AdminNavbar from "./components/AdminNavbar";
 import AdminLayout from './pages/admin/AdminLayout';
 import CustomerFeedback from './pages/feedback/CustomerFeedback';
+import AdminLogin from './pages/admin/auth/Login';
 
 
 function App() {

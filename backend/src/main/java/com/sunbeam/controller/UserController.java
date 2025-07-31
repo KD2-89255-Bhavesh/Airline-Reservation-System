@@ -8,24 +8,26 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.sunbeam.dto.CustomerDto;
-import com.sunbeam.dto.LoginRequest;
-import com.sunbeam.service.CustomerService;
+import com.sunbeam.dto.LoginDTO;
+import com.sunbeam.dto.UserDTO;
+import com.sunbeam.service.UserService;
 
 @RestController
 @RequestMapping("/customer")
 @CrossOrigin(origins = "http://localhost:3000")
-public class CustomerController {
+public class UserController {
+	
+	
 	@Autowired
-    private CustomerService customerService;
+    private UserService customerService;
 
     @PostMapping("/register")
-    public ResponseEntity<?> registerUser(@RequestBody CustomerDto dto) {
+    public ResponseEntity<?> registerUser(@RequestBody UserDTO dto) {
         return ResponseEntity.ok(customerService.register(dto));
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
+    public ResponseEntity<?> login(@RequestBody LoginDTO loginRequest) {
         return ResponseEntity.ok(customerService.login(loginRequest.getEmail(), loginRequest.getPassword()));
     }
 }
