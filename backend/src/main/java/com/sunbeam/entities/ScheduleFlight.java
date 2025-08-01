@@ -1,5 +1,6 @@
 package com.sunbeam.entities;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -46,10 +47,10 @@ public class ScheduleFlight {
 	private String destination;
 	    
 	@Column(name = "departure")
-	private LocalDateTime departure;
+	private LocalDate departure;
 	    
 	@Column(name = "arrival")
-	private LocalDateTime arrival;
+	private LocalDate arrival;
 	    
 	@Column(name = "seat_cost_of_economy")
 	private Integer seatCostOfEconomy;

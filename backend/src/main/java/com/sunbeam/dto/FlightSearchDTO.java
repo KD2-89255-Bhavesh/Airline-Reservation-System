@@ -12,9 +12,12 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class FlightSearchDTO {
-	private String source;
+    private String flightNumber;
+    private String source;
     private String destination;
-    private LocalDate departureDate;
-    private Integer passengers;
-    private String travelClass;
+    private LocalDate departure;
+    private LocalDate arrival;
+    private Integer seatCostOfEconomy;
+    private Integer seatCostOfBusiness;
+    private Integer seatCostOfFirst;
 }
