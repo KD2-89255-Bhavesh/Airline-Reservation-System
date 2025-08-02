@@ -16,7 +16,7 @@ import lombok.ToString;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class LoginDTO {
+public class SignInRequest {
 	
 	
 	 @NotBlank(message = "Email can't be blank")

@@ -1,18 +1,38 @@
 import React, { useState } from "react";
-import { Form, Button, Container, Alert } from "react-bootstrap";
+import {
+  Form,
+  Button,
+  Container,
+  Alert,
+  Card,
+  Row,
+  Col,
+} from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import { FaPlane, FaArrowLeft, FaCheck } from "react-icons/fa";
 import { toast } from "react-toastify";
+import { addAirline } from "../../services/AdminServices/airlineManagementServies";
 
 const AddAirline = () => {
   const navigate = useNavigate();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
+  const [airlineName, setAirlineName] = useState("");
+  const [airlineNoOfFlights, setAirlineNoOfFlights] = useState(0);
 
-  const submit = () => {
-    const [airlineName, flightNumber] = useState("");
-    const [airlineNoOfFlights, setAirlineNoOfFlights] = useState(0);
+  const submit = async() => {
 
-    const addAirline = async () => {};
+    const data = await addAirline(airlineName, airlineNoOfFlights);
+    if (!data) {
+      toast.error("Failed to add airline. Please try again.");
+      return;
+    }
+    toast.success("Airline added successfully!");
+    navigate("/admin/airlinemanagement");
+  };
 
-    addAirline(airlineData);
+  const handleBack = () => {
+    navigate("/admin/airlinemanagement");
   };
 
   return (
@@ -50,21 +70,17 @@ const AddAirline = () => {
                 </Alert>
               )}
 
-              <Form onSubmit={handleSubmit}>
+              <Form onSubmit={submit}>
                 <Form.Group className="mb-4">
                   <Form.Label className="fw-bold">Airline Name</Form.Label>
                   <Form.Control
                     type="text"
                     name="airlineName"
-                    placeholder="e.g. Delta Airlines"
-                    value={formData.airlineName}
-                    onChange={handleChange}
-                    isInvalid={!!errors.airlineName}
-                    className="py-2"
+                    placeholder="Airline Name"
+                    value={airlineName}
+                    onChange={(e) => setAirlineName(e.target.value)}
+                    required
                   />
-                  <Form.Control.Feedback type="invalid">
-                    {errors.airlineName}
-                  </Form.Control.Feedback>
                 </Form.Group>
 
                 <Form.Group className="mb-4">
@@ -73,15 +89,10 @@ const AddAirline = () => {
                     type="number"
                     name="noOfFlights"
                     placeholder="e.g. 25"
-                    value={formData.noOfFlights}
-                    onChange={handleChange}
-                    isInvalid={!!errors.noOfFlights}
-                    min="0"
-                    className="py-2"
+                    value={airlineNoOfFlights}
+                    onChange={(e) => setAirlineNoOfFlights(e.target.value)}
+                    min={1}
                   />
-                  <Form.Control.Feedback type="invalid">
-                    {errors.noOfFlights}
-                  </Form.Control.Feedback>
                 </Form.Group>
 
                 <div className="d-grid gap-3">
