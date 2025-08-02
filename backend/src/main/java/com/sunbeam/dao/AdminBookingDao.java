@@ -4,11 +4,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import com.sunbeam.entities.AirlineDetail;
+import com.sunbeam.entities.Booking;
 
 @Repository
-public interface AdminDao extends JpaRepository<AirlineDetail, Long>{
-	
-	
-	
+public interface AdminBookingDao extends JpaRepository<Booking, Long>{
+	@Query("select sum(totalAmount) from Booking")
+	long getTotalAmountBookingPassenger();
 }

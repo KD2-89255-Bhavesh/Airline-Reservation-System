@@ -12,9 +12,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AirlineDTO {
-    private Integer airlineId;
     private String airlineName;
-    private Integer noOfFlights;
+    private int noOfFlights;
     private LocalDate date;
-    private Integer adminId;
 }
