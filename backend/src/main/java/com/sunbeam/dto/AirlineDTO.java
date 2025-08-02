@@ -15,4 +15,5 @@ public class AirlineDTO {
     private String airlineName;
     private int noOfFlights;
     private LocalDate date;
+    private long admin_id;
 }

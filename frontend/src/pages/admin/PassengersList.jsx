@@ -38,11 +38,6 @@ const PassengersList = () => {
     // Filter logic would go here
   };
 
-  const handleExport = () => {
-    console.log("Exporting data");
-    // Export logic would go here
-  };
-
   const handleFilterChange = (e) => {
     setFilter(e.target.value);
     console.log("Filter changed to:", e.target.value);
@@ -51,7 +46,6 @@ const PassengersList = () => {
   return (
     <>
       <div className="passengers-card">
-        {/* Top right section with dropdown and export button */}
         <div className="top-right-controls">
           <select
             value={filter}
@@ -63,9 +57,6 @@ const PassengersList = () => {
             <option value="week">This Week</option>
             <option value="month">This Month</option>
           </select>
-          <button onClick={handleExport} className="export-btn">
-            Export
-          </button>
         </div>
 
         {/* Heading */}

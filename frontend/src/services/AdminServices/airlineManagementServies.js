@@ -11,12 +11,19 @@ export const fetchAirline = async () => {
   }
 };
 
-export const addAirline = async (airlineData) => {
+export const addAirline = async (airlineName, airlineNoOfFlights) => {
+
+  const airlineData = {
+    name: airlineName,
+    noOfFlights: airlineNoOfFlights,
+    admin_id: localStorage.getItem("adminId")
+  };
+
   try {
     const response = await axios.post(`${config.serverURL}/admin/addairline`, airlineData);
     return response.data;
   } catch (error) {
     console.error('Error adding airline:', error);
-    throw error; // Propagate the error to be handled by the caller
+    throw error;
   }
 }

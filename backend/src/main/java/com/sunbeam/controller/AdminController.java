@@ -51,10 +51,5 @@ public class AdminController {
         return ResponseEntity.ok(airlines);
     }
 	
-	@PostMapping("/addairline")
-    public ResponseEntity<?> addAirline(@RequestBody AirlineDTO dto) {
-        return ResponseEntity.ok(adminService.addAirline(dto));
-    }
-	
 	
 }
