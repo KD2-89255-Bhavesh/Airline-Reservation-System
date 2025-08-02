@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import com.sunbeam.dto.UserDTO;
 import com.sunbeam.entities.ScheduleFlight;
 import com.sunbeam.entities.User;
 

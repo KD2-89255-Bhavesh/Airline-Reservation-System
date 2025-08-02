@@ -10,7 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.sunbeam.dto.LoginDTO;
 import com.sunbeam.dto.UserDTO;
-import com.sunbeam.service.UserService;
+import com.sunbeam.entities.User;
+import com.sunbeam.service.UserServiceImpl;
 
 @RestController
 @RequestMapping("/customer")
@@ -19,7 +20,7 @@ public class UserController {
 	
 	
 	@Autowired
-    private UserService customerService;
+    private UserServiceImpl customerService;
 
     @PostMapping("/register")
     public ResponseEntity<?> registerUser(@RequestBody UserDTO dto) {
@@ -27,7 +28,7 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody LoginDTO loginRequest) {
+    public ResponseEntity<User> login(@RequestBody LoginDTO loginRequest) {
         return ResponseEntity.ok(customerService.login(loginRequest.getEmail(), loginRequest.getPassword()));
     }
 }
