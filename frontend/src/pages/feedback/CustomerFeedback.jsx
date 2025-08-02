@@ -1,7 +1,7 @@
 
 import React, { useState } from "react";
 import { toast } from "react-toastify";
-import { submitCustomerFeedBack } from "../../services/UserServices/feedback";
+import { submitCustomerFeedBack } from "../../services/AdminServices/feedback";
 import { useNavigate } from "react-router-dom";
 
 function CustomerFeedback() {

@@ -36,6 +36,11 @@ function BaseLogin({ loginType, authService, redirectPath }) {
         const result = await authService(email, password);
         if (result) {
           toast.success("Login successful!");
+          sessionStorage.setItem("isLoggedIn", "true");
+          sessionStorage.setItem("userEmail", email);
+          sessionStorage.setItem("userType", loginType);
+          sessionStorage.setItem("Name", result.name || "User");
+          sessionStorage.setItem("userId", result.admin_id || "0");
           navigate(redirectPath);
         } else {
           toast.error("Invalid credentials. Please try again.");
