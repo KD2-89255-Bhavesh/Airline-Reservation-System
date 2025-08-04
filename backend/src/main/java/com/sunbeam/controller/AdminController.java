@@ -12,12 +12,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sunbeam.dto.AirlineDTO;
+import com.sunbeam.dto.FeedbackResponseDTO;
 import com.sunbeam.entities.AirlineDetail;
+import com.sunbeam.entities.Feedback;
 import com.sunbeam.service.AdminServiceImpl;
 
 
 @RestController
 @RequestMapping("/admin")
+
 @CrossOrigin(origins = "http://localhost:3000")
 public class AdminController {
 	
@@ -56,5 +59,10 @@ public class AdminController {
         return ResponseEntity.ok(adminService.addAirline(dto));
     }
 	
+	@GetMapping("/feedback")
+	public ResponseEntity<List<Feedback>> getAllFeedback(){
+		List<Feedback> feedback = adminService.getAllFeedback();
+		return ResponseEntity.ok(feedback);
+	}
 	
 }

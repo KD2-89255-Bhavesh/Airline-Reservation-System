@@ -2,6 +2,8 @@ package com.sunbeam.entities;
 
 import java.time.LocalDate;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -51,6 +53,7 @@ public class Passenger {
     
     @ManyToOne
     @JoinColumn(name = "booking_id")
+    @JsonManagedReference
     private Booking booking;
     
     public enum Gender {

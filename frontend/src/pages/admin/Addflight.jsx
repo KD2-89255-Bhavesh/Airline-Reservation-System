@@ -137,8 +137,8 @@ function AddFlight() {
               <td>{flight.adt}</td>
               <td>{flight.ddt}</td>
               <td>₹{flight.cec}</td>
-              <td>{flight.cbc ? `₹${flight.cbc}` : '-'}</td>
-              <td>{flight.cfc ? `₹${flight.cfc}` : '-'}</td>
+              <td>{flight.cbc }</td>
+              <td>{flight.cfc }</td>
               <td>
                 <Button
                 onClick={addflightscheduler}

@@ -27,54 +27,59 @@ import AdminNavbar from "./components/AdminNavbar";
 import AdminLayout from './pages/admin/AdminLayout';
 import CustomerFeedback from './pages/feedback/CustomerFeedback';
 import AdminLogin from './pages/admin/auth/Login';
+import AddFlight from "./pages/admin/Addflight";
+import AdminViewFeedbackTable from "./pages/admin/auth/AdminViewFeedback";
 
 
 function App() {
   return (
-    <>
+//     <CustomerFeedback>
 
-      <Routes>
-        {/* Public/Home Pages */}
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/adminlogin" element={<AdminLogin />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/contactus" element={<ContactUs />} />
+//       <Routes>
+//         {/* Public/Home Pages */}
+//       <Route path="/" element={<Home />} />
+//       <Route path="/login" element={<Login />} />
+//       <Route path="/register" element={<Register />} />
+//       <Route path="/adminlogin" element={<AdminLogin />} />
+//       <Route path="/about" element={<About />} />
+//       <Route path="/contactus" element={<ContactUs />} />
 
-        {/* Customer Routes */}
-        <Route path="/customer">
-          <Route index element={<FlightSearch />} />
-          <Route path="flightlist" element={<FlightList />} />
-          <Route path="passengerdetails" element={<PassengerDetails />} />
-          <Route path="bookingpreview" element={<BookingPreview />} />
-          <Route path="payment" element={<Payment />} />
-          <Route path="ticketpage" element={<TicketPage />} />
-        </Route>
-
-        
-
-        {/* Admin Routes */}
-        <Route path="/admin" element={<AdminLayout />}>
+// //         {/* Customer Routes */}
+//       <Route path="/customer">
+//         <Route index element={<FlightSearch />} />
+//         <Route path="flightlist" element={<FlightList />} />
+//         <Route path="passengerdetails" element={<PassengerDetails />} />
+//         <Route path="bookingpreview" element={<BookingPreview />} />
+//         <Route path="payment" element={<Payment />} />
+//         <Route path="ticketpage" element={<TicketPage />} />
+//       </Route>
 
 
-          <Route index element={<AdminDashboard />} />
-          <Route path="admindashboard" element={<AdminDashboard />} />
-          <Route path="addairline" element={<AddAirline />} />
-          <Route path="airlinemanagement" element={<AirlineManagement />} />
-          <Route path="flightmanagement" element={<FlightManagement />} />
-          <Route path="scheduleflight" element={<ScheduleFight />} />
-          <Route path="passengerslist" element={<PassengersList />} />
-          <Route path="addairline" element={<AddAirline />} />
-          <Route path="addflight" element={<AddFlights />} />
-          <Route path="addscheduleflight" element={<AddScheduleFlight />} />
-          <Route path="profile" element={<Profile />} />
-          <Route path="feedback" element={<CustomerFeedback />} />
-        </Route>
-      </Routes>
-      <ToastContainer />
 
-    </>
+//       {/* Admin Routes */}
+//       <Route path="/admin" element={<AdminLayout />}>
+
+
+//         <Route index element={<AdminDashboard />} />
+//         <Route path="admindashboard" element={<AdminDashboard />} />
+//         <Route path="addairline" element={<AddAirline />} />
+//         <Route path="airlinemanagement" element={<AirlineManagement />} />
+//         <Route path="flightmanagement" element={<FlightManagement />} />
+//         <Route path="scheduleflight" element={<ScheduleFight />} />
+//         <Route path="passengerslist" element={<PassengersList />} />
+//         <Route path="addairline" element={<AddAirline />} />
+//         <Route path="addflight" element={<AddFlights />} />
+//         <Route path="addscheduleflight" element={<AddScheduleFlight />} />
+//         <Route path="profile" element={<Profile />} />
+//         <Route path="feedback" element={<CustomerFeedback />} />
+//       </Route>
+//     </Routes >
+//       <ToastContainer /> 
+      
+//     </>
+      //<AddFlight/>
+      // <CustomerFeedback/>
+    <AdminViewFeedbackTable/>
   );
 }
 
