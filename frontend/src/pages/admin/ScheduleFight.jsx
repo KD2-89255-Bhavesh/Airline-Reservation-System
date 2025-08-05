@@ -94,7 +94,7 @@ function ScheduleFight() {
 
   const navigate = useNavigate()
   const back = ()=>{
-    navigate("/addflight")
+    navigate("/admin/addflight")
   }
 
   return (

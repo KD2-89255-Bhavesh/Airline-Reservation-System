@@ -82,16 +82,14 @@ function AddFlight() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Add your submission logic here
     console.log("Flight scheduled:", formData);
     setShowModal(false);
-    // You would typically update the flights array here
   };
 
   const navigate = useNavigate()
 
   const addflightscheduler = () =>{
-    navigate("/scheduleflight")
+    navigate("/admin/scheduleflight")
   }
 
   return (
