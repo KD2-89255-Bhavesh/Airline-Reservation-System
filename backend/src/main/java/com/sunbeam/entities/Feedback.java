@@ -1,47 +1,52 @@
 package com.sunbeam.entities;
 
 import java.time.LocalDateTime;
-
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "feedback")
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
 public class Feedback {
-	    @Id
-	    @GeneratedValue(strategy = GenerationType.IDENTITY)
-	    @Column(name = "feedback_id")
-	    private Integer feedbackId;
-	    
-	    @ManyToOne
-	    @JoinColumn(name = "user_id")
-	    private User user;
-	    
-	    @OneToOne
-	    @JoinColumn(name = "booking_id")
-	    private Booking booking;
-	    
-	    @Column(name = "rating")
-	    private Integer rating;
-	    
-	    @Column(name = "comments", columnDefinition = "TEXT")
-	    private String comments;
-	    
-	    @Column(name = "submitted_at", columnDefinition = "DATETIME DEFAULT CURRENT_TIMESTAMP")
-	    private LocalDateTime submittedAt;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "feedback_id")
+    private Long id;
+
+    @Column(length = 500)
+    private String comments;
+
+    @Column(nullable = false)
+    private Integer rating;
+
+    @Column(name = "submitted_at", nullable = false)
+    private LocalDateTime submittedAt;
+
+    // Relationship with Booking
+    @ManyToOne
+    @JoinColumn(name = "booking_id", nullable = false)
+    private Booking booking;
+
+    // Relationship with User
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+
+    // Getters and Setters
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
+
+    public String getComments() { return comments; }
+    public void setComments(String comments) { this.comments = comments; }
+
+    public Integer getRating() { return rating; }
+    public void setRating(Integer rating) { this.rating = rating; }
+
+    public LocalDateTime getSubmittedAt() { return submittedAt; }
+    public void setSubmittedAt(LocalDateTime submittedAt) { this.submittedAt = submittedAt; }
+
+    public Booking getBooking() { return booking; }
+    public void setBooking(Booking booking) { this.booking = booking; }
+
+    public User getUser() { return user; }
+    public void setUser(User user) { this.user = user; }
 }

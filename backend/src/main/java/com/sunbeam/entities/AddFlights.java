@@ -3,6 +3,8 @@ package com.sunbeam.entities;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -54,6 +56,7 @@ public class AddFlights {
 	private Long totalNoOfSeats;
 	
 	@OneToMany(mappedBy="flight",cascade=CascadeType.ALL)
+	@JsonIgnore
 	private List<ScheduleFlight> schedules = new ArrayList<>();
 	
     public enum FlightClass{

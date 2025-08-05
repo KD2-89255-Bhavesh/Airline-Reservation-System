@@ -111,3 +111,4 @@ function BaseLogin({ loginType, authService, redirectPath }) {
 }
 
 export default BaseLogin;
+
