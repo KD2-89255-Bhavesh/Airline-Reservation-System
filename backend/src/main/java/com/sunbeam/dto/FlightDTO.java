@@ -10,12 +10,12 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class FlightDTO {
-    private Integer flightId;
-    private Integer airlineId;
+    private Long flightId;
+    private Long airlineId;
     private String flightNo;
     private String flightClass;
-    private Integer noOfEconomySeats;
-    private Integer noOfBusinessSeats;
-    private Integer noOfFirstSeats;
-    private Integer totalNoOfSeats;
+    private Long noOfEconomySeats;
+    private Long noOfBusinessSeats;
+    private Long noOfFirstSeats;
+    private Long totalNoOfSeats;
 }

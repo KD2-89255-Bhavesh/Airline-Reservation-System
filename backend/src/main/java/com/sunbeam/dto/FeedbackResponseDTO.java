@@ -11,11 +11,14 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class FeedbackDTO {
-    private Integer feedbackId;
-    private Integer userId;
-    private Integer bookingId;
+public class FeedbackResponseDTO {
+    private String userName;
+    private long bookingId;
+    private String flightname;
     private Integer rating;
     private String comments;
     private LocalDateTime submittedAt;
+    
+
 }
+
