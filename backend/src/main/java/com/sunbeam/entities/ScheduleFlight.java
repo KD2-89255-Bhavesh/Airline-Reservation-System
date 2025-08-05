@@ -30,7 +30,7 @@ public class ScheduleFlight {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "sch_flight_id")
-	private Integer schFlightId;
+	private Long schFlightId;
 	    
 	@ManyToOne
 	@JoinColumn(name = "flight_id")
@@ -47,21 +47,19 @@ public class ScheduleFlight {
 	private String destination;
 	    
 	@Column(name = "departure")
-	private LocalDate departure;
+	private LocalDateTime departure;
 	    
 	@Column(name = "arrival")
-	private LocalDate arrival;
+	private LocalDateTime arrival;
 	    
 	@Column(name = "seat_cost_of_economy")
-	private Integer seatCostOfEconomy;
+	private Long seatCostOfEconomy;
 	    
 	@Column(name = "seat_cost_of_business")
-	private Integer seatCostOfBusiness;
+	private Long seatCostOfBusiness;
 	    
 	@Column(name = "seat_cost_of_first")
-	private Integer seatCostOfFirst;
-	    
-	@OneToMany(mappedBy = "schFlight", cascade = CascadeType.ALL)
-	private List<Booking> bookings = new ArrayList<>();
+	private Long seatCostOfFirst;
+	   
 
 }

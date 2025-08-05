@@ -1,20 +1,20 @@
 package com.sunbeam.dto;
 
-import java.time.LocalDateTime;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+
+import java.math.BigDecimal;
+
+import com.sunbeam.entities.Payment.PaymentMethod;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class PaymentDTO {
-    private Integer paymentId;
+    private PaymentMethod method;
     private String transactionId;
-    private LocalDateTime paymentTime;
-    private String paymentMethod;
-    private String paymentStatus;
+    private BigDecimal amount;
+    private String currency;
+    private String paymentDetails; // JSON string
 }

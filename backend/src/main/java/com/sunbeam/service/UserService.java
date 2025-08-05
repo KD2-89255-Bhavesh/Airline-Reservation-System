@@ -3,8 +3,16 @@ package com.sunbeam.service;
 import java.time.LocalDate;
 import java.util.List;
 
-import com.sunbeam.dto.FlightSearchDTO;
+import org.springframework.stereotype.Service;
+
+import com.sunbeam.dto.BookingRequestDTO;
+import com.sunbeam.dto.BookingResponseDTO;
+import com.sunbeam.dto.FlightSearchResponseDto;
+
+import io.swagger.v3.oas.annotations.servers.Server;
+
 
 public interface UserService {
-	List<FlightSearchDTO> flightSearch(String source,String destination,LocalDate departure );
+    List<FlightSearchResponseDto> flightSearch(String source, String destination, LocalDate departure);
+    BookingResponseDTO createBooking(BookingRequestDTO bookingRequestDto);
 }

@@ -30,8 +30,8 @@ import lombok.Setter;
 public class User {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="user_id")
-	private Long userId;
+	@Column(name="id")
+	private Long Id;
 	
 	@Enumerated(EnumType.STRING)
 	@Column(name="title",nullable=false)

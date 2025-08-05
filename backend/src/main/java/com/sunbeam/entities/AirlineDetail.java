@@ -31,7 +31,7 @@ public class AirlineDetail {
 	private String airlineName;
 	
 	@Column(name="no_of_flights",nullable = false)
-	private int noOfFlights;
+	private Long noOfFlights;
 	
 	@Column(name="date",nullable=false)
 	private LocalDate date;

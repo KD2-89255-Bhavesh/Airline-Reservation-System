@@ -25,7 +25,7 @@ import AddScheduleFlight from "./pages/admin/AddScheduleFlight";
 import FlightSearch from "./pages/customer/FlightSearch";
 import AdminNavbar from "./components/AdminNavbar";
 import AdminLayout from './pages/admin/AdminLayout';
-import CustomerFeedback from './pages/feedback/CustomerFeedback';
+// import CustomerFeedback from './pages/feedback/CustomerFeedback';
 import AdminLogin from './pages/admin/auth/Login';
 
 
@@ -69,7 +69,7 @@ function App() {
           <Route path="addflight" element={<AddFlights />} />
           <Route path="addscheduleflight" element={<AddScheduleFlight />} />
           <Route path="profile" element={<Profile />} />
-          <Route path="feedback" element={<CustomerFeedback />} />
+          {/* <Route path="feedback" element={<CustomerFeedback />} /> */}
         </Route>
       </Routes>
       <ToastContainer />
