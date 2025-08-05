@@ -9,8 +9,12 @@ import com.sunbeam.dao.AddAirlineDao;
 import com.sunbeam.dao.AddFlightDao;
 import com.sunbeam.dao.AdminBookingDao;
 import com.sunbeam.dao.AdminDao;
+import com.sunbeam.dao.AirlineDetailsDao;
+import com.sunbeam.dao.FeedbackDao;
 import com.sunbeam.dto.AirlineDTO;
+import com.sunbeam.dto.FeedbackResponseDTO;
 import com.sunbeam.entities.AirlineDetail;
+import com.sunbeam.entities.Feedback;
 
 @Service
 public class AdminServiceImpl implements AdminService{
@@ -26,6 +30,9 @@ public class AdminServiceImpl implements AdminService{
 	
 	@Autowired
 	public AddAirlineDao airlineDetailsDao;
+	
+	@Autowired
+	private FeedbackDao feedbackDao;
 	
 	@Override
 	public long getTotalAirlinesCount() {
@@ -51,5 +58,13 @@ public class AdminServiceImpl implements AdminService{
 	public List<AirlineDetail> getAllAirlines() {
 		return airlineDetailsDao.findAll();
 	}
+	
+	@Override
+	public List<Feedback> getAllFeedback() {
+		// TODO Auto-generated method stub
+		return feedbackDao.findAll();
+	}
+
+	
 	
 }
