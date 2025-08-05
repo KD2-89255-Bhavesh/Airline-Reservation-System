@@ -11,7 +11,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class PassengerDTO {
+public class PassengerDto {
     private String name;
     private Integer age;
     private Passenger.Gender gender;

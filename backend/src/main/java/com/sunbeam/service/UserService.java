@@ -5,8 +5,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.sunbeam.dto.BookingRequestDTO;
-import com.sunbeam.dto.BookingResponseDTO;
+import com.sunbeam.dto.BookingRequestDto;
+import com.sunbeam.dto.BookingResponseDto;
 import com.sunbeam.dto.FlightSearchResponseDto;
 
 import io.swagger.v3.oas.annotations.servers.Server;
@@ -14,5 +14,5 @@ import io.swagger.v3.oas.annotations.servers.Server;
 
 public interface UserService {
     List<FlightSearchResponseDto> flightSearch(String source, String destination, LocalDate departure);
-    BookingResponseDTO createBooking(BookingRequestDTO bookingRequestDto);
+    BookingResponseDto createBooking(BookingRequestDto bookingRequestDto);
 }

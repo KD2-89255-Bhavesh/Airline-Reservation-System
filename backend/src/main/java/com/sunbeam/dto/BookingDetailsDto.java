@@ -11,7 +11,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class BookingDetailsDTO {
+public class BookingDetailsDto {
     private String bookingId;
     private String pnr;
     private String flightNumber;
@@ -25,5 +25,5 @@ public class BookingDetailsDTO {
     private String classType;
     private Integer totalPassengers;
     private String bookingStatus;
-    private List<PassengerDTO> passengers;
+    private List<PassengerDto> passengers;
 }

@@ -14,12 +14,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.sunbeam.dto.BookingRequestDTO;
+import com.sunbeam.dto.BookingRequestDto;
 
-import com.sunbeam.dto.BookingResponseDTO;
+import com.sunbeam.dto.BookingResponseDto;
 
 import com.sunbeam.dto.FlightSearchResponseDto;
-import com.sunbeam.dto.LoginDTO;
 import com.sunbeam.dto.UserDTO;
 import com.sunbeam.service.AuthService;
 import com.sunbeam.service.UserService;
@@ -40,10 +39,7 @@ public class UserController {
 		return ResponseEntity.ok(authService.register(dto));
 	}
 
-	@PostMapping("/login")
-	public ResponseEntity<?> login(@RequestBody LoginDTO loginRequest) {
-		return ResponseEntity.ok(authService.login(loginRequest.getEmail(), loginRequest.getPassword()));
-	}
+
 
 	@GetMapping("/flightlist")
 	public ResponseEntity<List<FlightSearchResponseDto>> searchFlights(@RequestParam String from,
@@ -53,8 +49,8 @@ public class UserController {
 	}
 
 	@PostMapping("/bookings")
-	public ResponseEntity<BookingResponseDTO> createBooking(@RequestBody BookingRequestDTO bookingRequestDto) {
-		BookingResponseDTO responseDto = userService.createBooking(bookingRequestDto);
+	public ResponseEntity<BookingResponseDto> createBooking(@RequestBody BookingRequestDto bookingRequestDto) {
+		BookingResponseDto responseDto = userService.createBooking(bookingRequestDto);
 		return ResponseEntity.ok(responseDto);
 	}
 }

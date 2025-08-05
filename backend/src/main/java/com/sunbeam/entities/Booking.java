@@ -23,10 +23,10 @@ public class Booking {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String bookingId;
+    private Long bookingId;
 
-    @Column(name = "pnr", unique = true, nullable = false)
-    private String pnr;
+//    @Column(name = "pnr", unique = true, nullable = false)
+//    private String pnr;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)

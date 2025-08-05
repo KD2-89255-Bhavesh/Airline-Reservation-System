@@ -11,7 +11,7 @@ import com.sunbeam.entities.Payment.PaymentMethod;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class PaymentDTO {
+public class PaymentDto {
     private PaymentMethod method;
     private String transactionId;
     private BigDecimal amount;

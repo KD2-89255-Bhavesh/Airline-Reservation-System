@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class PaymentRequestDTO {
+public class PaymentRequestDto {
 	 private Integer bookingId;
 	 private String paymentMethod;
 }
