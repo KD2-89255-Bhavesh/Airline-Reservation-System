@@ -13,6 +13,5 @@ public interface AdminService {
 	long getTotalBooking();
 	long getTotalAmountBooking();
 	List<AirlineDetail> getAllAirlines();
-AirlineDetail addAirline(AirlineDTO airlineDTO);
 	List<Feedback> getAllFeedback();
 }

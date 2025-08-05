@@ -53,10 +53,6 @@ public class AdminController {
         List<AirlineDetail> airlines = adminService.getAllAirlines();
         return ResponseEntity.ok(airlines);
     }
-@PostMapping("/addairline")
-    public ResponseEntity<?> addAirline(@RequestBody AirlineDTO dto) {
-        return ResponseEntity.ok(adminService.addAirline(dto));
-    }
 	
 	@GetMapping("/feedback")
 	public ResponseEntity<List<Feedback>> getAllFeedback(){

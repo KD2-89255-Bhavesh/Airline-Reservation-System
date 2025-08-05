@@ -9,7 +9,6 @@ import com.sunbeam.dao.AddAirlineDao;
 import com.sunbeam.dao.AddFlightDao;
 import com.sunbeam.dao.AdminBookingDao;
 import com.sunbeam.dao.AdminDao;
-import com.sunbeam.dao.AirlineDetailsDao;
 import com.sunbeam.dao.FeedbackDao;
 import com.sunbeam.dto.AirlineDTO;
 import com.sunbeam.dto.FeedbackResponseDTO;
