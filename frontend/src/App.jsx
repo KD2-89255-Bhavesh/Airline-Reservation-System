@@ -29,6 +29,8 @@ import CustomerFeedback from './pages/feedback/CustomerFeedback';
 import AdminLogin from './pages/admin/auth/Login';
 import AddFlight from "./pages/admin/Addflight";
 import AdminViewFeedbackTable from "./pages/admin/auth/AdminViewFeedback";
+import PerformanceChart from "./components/PerformanceChart";
+import BaseLogin from "./components/auth/BaseLogin";
 
 
 function App() {
@@ -79,7 +81,11 @@ function App() {
 //     </>
       //<AddFlight/>
       // <CustomerFeedback/>
-    <AdminViewFeedbackTable/>
+    // <AdminViewFeedbackTable/>
+    // <About/>
+    <PerformanceChart/>
+    // <Profile/>
+    // <ContactUs/>
   );
 }
 
