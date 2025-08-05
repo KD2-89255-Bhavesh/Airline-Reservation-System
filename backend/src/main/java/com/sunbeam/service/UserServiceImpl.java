@@ -7,8 +7,11 @@ import com.sunbeam.dao.UserDao;
 import com.sunbeam.dto.UserDTO;
 import com.sunbeam.entities.User;
 
+import jakarta.transaction.Transactional;
+
 
 @Service
+@Transactional
 public class UserServiceImpl implements UserService{
 	
 	@Autowired
@@ -30,9 +33,8 @@ public class UserServiceImpl implements UserService{
 	
 	
 	public User login(String email, String password) {
-        return userDao.findByEmail(email)
-                .filter(u -> u.getPasswordHash().equals(password))
-                .orElseThrow(() -> new RuntimeException("Invalid credentials"));
+		return userDao.findByEmail(email)
+	            .filter(u -> u.getPasswordHash().equals(password))
+	            .orElseThrow(() -> new RuntimeException("Invalid credentials"));
     }
-	
 }
