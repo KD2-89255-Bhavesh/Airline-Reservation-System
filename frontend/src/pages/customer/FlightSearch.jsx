@@ -28,6 +28,9 @@ const FlightSearch = () => {
     setIsSearching(true);
 
     try {
+
+      const flights = await searchFlights(from, to, departureDate);
+      navigate('/flightlist', { state: { flights } });
       const apiFlights = await searchFlights(from, to, departureDate);
 
       if (!apiFlights || apiFlights.length === 0) {
@@ -56,6 +59,7 @@ const FlightSearch = () => {
       }));
 
       navigate('/customer/flightlist', { state: { flights: transformedFlights } });
+
     } catch (error) {
       alert("Failed to fetch flights. Please try again.");
       console.error("Flight search error:", error);
@@ -65,42 +69,44 @@ const FlightSearch = () => {
   };
 
   return (
-    <div className="hero-section">
-      <div className="booking-card">
-        <div className="booking-header">
-          <FaPlane className="booking-icon" />
-          <h2>Book A Flight</h2>
-        </div>
+    <div className="flight-search-container">
+      <div className="hero-section">
+        <div className="booking-card">
+          <div className="booking-header">
+            <FaPlane className="booking-icon" />
+            <h2>Book A Flight</h2>
+          </div>
 
-        <form className="booking-form" onSubmit={customerSearchFlight}>
-          <div className="form-row">
-            <div className="form-group">
-              <div className="input-container">
-                <label>From</label>
-                <input 
-                  type="text" 
-                  placeholder="Enter departure city"
-                  value={from}
-                  onChange={(e) => setFrom(e.target.value)}
-                  className="booking-input"
-                  required
-                />
+          <form className="booking-form" onSubmit={customerSearchFlight}>
+            <div className="form-row">
+              <div className="form-group">
+                <div className="input-container">
+                  <label>From</label>
+                  <input 
+                    type="text" 
+                    placeholder="Enter departure city"
+                    value={from}
+                    onChange={(e) => setFrom(e.target.value)}
+                    className="booking-input"
+                    required
+                  />
+                </div>
               </div>
-            </div>
 
-            <div className="form-group">
-              <div className="input-container">
-                <label>To</label>
-                <input 
-                  type="text" 
-                  placeholder="Enter destination city"
-                  value={to}
-                  onChange={(e) => setTo(e.target.value)}
-                  className="booking-input"
-                  required
-                />
+              <div className="form-group">
+                <div className="input-container">
+                  <label>To</label>
+                  <input 
+                    type="text" 
+                    placeholder="Enter destination city"
+                    value={to}
+                    onChange={(e) => setTo(e.target.value)}
+                    className="booking-input"
+                    required
+                  />
+                </div>
               </div>
-            </div>
+
 
             <div className="form-group">
               <div className="input-container">
@@ -113,9 +119,9 @@ const FlightSearch = () => {
                   required
                   min={new Date().toISOString().split('T')[0]}
                 />
+
               </div>
             </div>
-          </div>
 
           <button 
             type="submit" 

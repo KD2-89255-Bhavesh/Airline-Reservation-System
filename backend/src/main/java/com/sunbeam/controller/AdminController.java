@@ -9,12 +9,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sunbeam.dto.AirlineDTO;
-import com.sunbeam.dto.FeedbackResponseDTO;
 import com.sunbeam.entities.AirlineDetail;
 import com.sunbeam.entities.Feedback;
+import com.sunbeam.entities.User;
 import com.sunbeam.service.AdminServiceImpl;
 
 
@@ -59,5 +60,13 @@ public class AdminController {
 		List<Feedback> feedback = adminService.getAllFeedback();
 		return ResponseEntity.ok(feedback);
 	}
+	
+	@GetMapping("/profile")
+	public ResponseEntity<?> getUserByEmail(@RequestParam String email) {
+	    return adminService.getUserByEmail(email)
+	            .map(user -> ResponseEntity.ok().body(user))
+	            .orElseThrow();
+	}
+
 	
 }
