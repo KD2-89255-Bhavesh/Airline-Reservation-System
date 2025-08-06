@@ -6,22 +6,61 @@ import { searchFlights } from '../../services/customerService/flightSearchServic
 
 const FlightSearch = () => {
   const navigate = useNavigate();
-
   const [from, setFrom] = useState('');
   const [to, setTo] = useState('');
   const [departureDate, setDepartureDate] = useState('');
+  const [isSearching, setIsSearching] = useState(false);
+
+  const calculateDuration = (departureTime, arrivalTime) => {
+    const dep = new Date(`2000-01-01T${departureTime}`);
+    const arr = new Date(`2000-01-01T${arrivalTime}`);
+    
+    if (arr < dep) arr.setDate(arr.getDate() + 1);
+    
+    const diffMs = arr - dep;
+    const hours = Math.floor(diffMs / (1000 * 60 * 60));
+    const minutes = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60));
+    return `${hours}h ${minutes}m`;
+  };
 
   const customerSearchFlight = async (e) => {
     e.preventDefault();
+    setIsSearching(true);
 
     try {
-      const flights = await searchFlights(from, to, departureDate);
+      const apiFlights = await searchFlights(from, to, departureDate);
 
-      // You can store in context/state or pass via navigation
-      navigate('/flightlist', { state: { flights } });
+      if (!apiFlights || apiFlights.length === 0) {
+        alert("No flights found for your search criteria.");
+        return;
+      }
 
+      const transformedFlights = apiFlights.map(flight => ({
+        flightNumber: flight.flightNo,
+        airline: flight.airlineName,
+        source: flight.fromLocation,
+        destination: flight.toLocation,
+        departureTime: flight.departureTime,
+        arrivalTime: flight.arrivalTime,
+        duration: calculateDuration(flight.departureTime, flight.arrivalTime),
+        prices: {
+          economy: flight.economyFare,
+          business: flight.businessFare,
+          firstClass: flight.firstFare
+        },
+        seatsAvailable: {
+          economy: flight.availableEconomySeats,
+          business: flight.availableBusinessSeats,
+          firstClass: flight.availableFirstSeats
+        }
+      }));
+
+      navigate('/customer/flightlist', { state: { flights: transformedFlights } });
     } catch (error) {
       alert("Failed to fetch flights. Please try again.");
+      console.error("Flight search error:", error);
+    } finally {
+      setIsSearching(false);
     }
   };
 
@@ -72,14 +111,19 @@ const FlightSearch = () => {
                   onChange={(e) => setDepartureDate(e.target.value)}
                   className="booking-input"
                   required
+                  min={new Date().toISOString().split('T')[0]}
                 />
               </div>
             </div>
           </div>
 
-          <button type="submit" className="search-btn">
+          <button 
+            type="submit" 
+            className="search-btn"
+            disabled={isSearching}
+          >
             <FaSearch className="search-icon" />
-            Search Flights
+            {isSearching ? 'Searching...' : 'Search Flights'}
           </button>
         </form>
       </div>

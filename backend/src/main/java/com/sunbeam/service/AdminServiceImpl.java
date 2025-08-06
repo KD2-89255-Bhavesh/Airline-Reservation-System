@@ -46,10 +46,10 @@ public class AdminServiceImpl implements AdminService{
 		return adminBookingDao.count();
 	}
 
-	@Override
-	public long getTotalAmountBooking() {
-		return adminBookingDao.getTotalAmountBookingPassenger();
-	}
+//	@Override
+//	public Double getTotalAmountBooking() {
+//		return adminBookingDao.getTotalAmountBookingPassenger();
+//	}
 
 	@Override
 	public List<AddAirlineDto> getAllAirlines() {

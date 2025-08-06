@@ -19,44 +19,98 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
+
+import java.time.LocalDateTime;
+
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
+
+import java.time.LocalDateTime;
+
 @Entity
-@Table(name = "passenger")
-@Getter
-@Setter
+@Table(name = "passengers")
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class Passenger {
-	@Id
+
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "p_id")
-    private Integer pId;
-    
-    @Enumerated(EnumType.STRING)
-    @Column(name = "title", nullable = false)
-    private Title title;
-    
-    @Column(name = "first_name", nullable = false, length = 50)
-    private String firstName;
-    
-    @Column(name = "last_name", nullable = false, length = 50)
-    private String lastName;
-    
-    @Column(name = "mobile_no", length = 15)
-    private String mobileNo;
-    
-    @Column(name = "dob")
-    private LocalDate dob;
-    
-    @Enumerated(EnumType.STRING)
-    @Column(name = "gender")
-    private Gender gender;
-    
-    @ManyToOne
+    private Long id;
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "booking_id")
     @JsonManagedReference
     private Booking booking;
-    
+
+    @Column(name = "name", nullable = false)
+    private String name;
+
+    @Column(name = "age")
+    private Integer age;
+
+    @Column(name = "gender")
+    @Enumerated(EnumType.STRING)
+    private Gender gender;
+
+    @Column(name = "seat_number")
+    private String seatNumber;
+
+    @Column(name = "passport_number")
+    private String passportNumber;
+
+    @Column(name = "special_requests", columnDefinition = "TEXT")
+    private String specialRequests;
+
+    @Column(name = "meal_preference")
+    @Enumerated(EnumType.STRING)
+    private MealPreference mealPreference;
+
+    @CreationTimestamp
+    @Column(name = "created_at")
+    private LocalDateTime createdAt;
+
+    // Enums
     public enum Gender {
-        Male, Female, Other
+        MALE("Male"),
+        FEMALE("Female"),
+        OTHER("Other");
+
+        private final String displayName;
+
+        Gender(String displayName) {
+            this.displayName = displayName;
+        }
+
+        public String getDisplayName() {
+            return displayName;
+        }
+    }
+
+    public enum MealPreference {
+        VEGETARIAN("Vegetarian"),
+        NON_VEGETARIAN("Non-Vegetarian"),
+        VEGAN("Vegan"),
+        JAIN("Jain"),
+        DIABETIC("Diabetic"),
+        NONE("No Preference");
+
+        private final String displayName;
+
+        MealPreference(String displayName) {
+            this.displayName = displayName;
+        }
+
+        public String getDisplayName() {
+            return displayName;
+        }
     }
 }

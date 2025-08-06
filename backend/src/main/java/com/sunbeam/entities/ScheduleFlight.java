@@ -1,5 +1,6 @@
 package com.sunbeam.entities;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +32,7 @@ public class ScheduleFlight {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "sch_flight_id")
-	private Integer schFlightId;
+	private Long schFlightId;
 	    
 	@ManyToOne
 	@JoinColumn(name = "flight_id")
@@ -54,16 +55,16 @@ public class ScheduleFlight {
 	private LocalDateTime arrival;
 	    
 	@Column(name = "seat_cost_of_economy")
-	private Integer seatCostOfEconomy;
+	private Long seatCostOfEconomy;
 	    
 	@Column(name = "seat_cost_of_business")
-	private Integer seatCostOfBusiness;
+	private Long seatCostOfBusiness;
 	    
 	@Column(name = "seat_cost_of_first")
-	private Integer seatCostOfFirst;
+	private Long seatCostOfFirst;
 	    
-	@OneToMany(mappedBy = "schFlight", cascade = CascadeType.ALL)
-	@JsonIgnore
-	private List<Booking> bookings = new ArrayList<>();
+//	@OneToMany(mappedBy = "schFlight", cascade = CascadeType.ALL)
+//	@JsonIgnore
+//	private List<Booking> bookings = new ArrayList<>();
 
 }

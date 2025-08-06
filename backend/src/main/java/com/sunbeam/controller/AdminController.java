@@ -43,19 +43,15 @@ public class AdminController {
 		return ResponseEntity.ok(adminService.getTotalBooking());
 	}
 	
-	@GetMapping("/airlines/totalAmountBooking")
-	public ResponseEntity<Long> countTotalAmountBooking(){
-		return ResponseEntity.ok(adminService.getTotalAmountBooking());
-	}
+//	@GetMapping("/airlines/totalAmountBooking")
+//	public ResponseEntity<Double> countTotalAmountBooking(){
+//		return ResponseEntity.ok(adminService.getTotalAmountBooking());
+//	}
 	
 	@GetMapping("/airlineManagement")
     public ResponseEntity<List<AirlineDetail>> getAllAirlines() {
         List<AirlineDetail> airlines = adminService.getAllAirlines();
         return ResponseEntity.ok(airlines);
-    }
-@PostMapping("/addairline")
-    public ResponseEntity<?> addAirline(@RequestBody AirlineDTO dto) {
-        return ResponseEntity.ok(adminService.addAirline(dto));
     }
 	
 	@GetMapping("/feedback")
