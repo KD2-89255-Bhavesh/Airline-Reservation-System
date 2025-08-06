@@ -1,7 +1,6 @@
 package com.sunbeam.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,11 +10,10 @@ import com.sunbeam.dao.AddFlightDao;
 import com.sunbeam.dao.AdminBookingDao;
 import com.sunbeam.dao.AdminDao;
 import com.sunbeam.dao.FeedbackDao;
-
+import com.sunbeam.dao.UserDao;
 import com.sunbeam.dto.AddAirlineDto;
-
+import com.sunbeam.entities.AirlineDetail;
 import com.sunbeam.entities.Feedback;
-import com.sunbeam.entities.User;
 
 @Service
 public class AdminServiceImpl implements AdminService{
@@ -59,7 +57,7 @@ public class AdminServiceImpl implements AdminService{
 //	}
 
 	@Override
-	public List<AddAirlineDto> getAllAirlines() {
+	public List<AirlineDetail> getAllAirlines() {
 		return airlineDetailsDao.findAll();
 	}
 	
