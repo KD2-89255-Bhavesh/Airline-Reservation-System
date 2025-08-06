@@ -1,111 +1,133 @@
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import "bootstrap/dist/css/bootstrap.min.css";
 
-import React, { useState } from "react";
-import { toast } from "react-toastify";
-import { submitCustomerFeedBack } from "../../services/UserServices/feedback";
-import { useNavigate } from "react-router-dom";
+const CustomerFeedback = () => {
+  const [users, setUsers] = useState([]);
+  const [bookings, setBookings] = useState([]);
+  const [formData, setFormData] = useState({
+    user_id: "",
+    booking_id: "",
+    rating: 0,
+    comments: ""
+  });
+  const [alert, setAlert] = useState({ type: "", message: "" });
 
-function CustomerFeedback() {
-  const [userId, setUserId] = useState("4");
-  const [bookingId, setBookingId] = useState("1");
-  const [rating, setRating] = useState("");
-  const [comment, setComment] = useState("");
+  // ✅ Fetch users and bookings from backend
+  useEffect(() => {
+    axios.get("http://localhost:8080/customer/feedback")
+      .then((res) => setUsers(res.data))
+      .catch((err) => console.error("Error fetching users:", err));
 
-  const navigate = useNavigate();
+    axios.get("http://localhost:8080/customer/booking")
+      .then((res) => setBookings(res.data))
+      .catch((err) => console.error("Error fetching bookings:", err));
+  }, []);
 
-  const onFeedBack = async () => {
-    if (rating < 1 && rating > 5) {
-      toast.warn("please enter the rating inside 1-5");
-    } else if (comment.length == 0) {
-      toast.warn("please enter the comment..!");
-    } else {
-      const result = await submitCustomerFeedBack(
-        userId,
-        bookingId,
-        rating,
-        comment
-      );
-      if (!result) {
-        toast.error("Error while feedback");
-      } else {
-        if (result["status"] == "success") {
-          toast.success("successfully registered a user");
-          navigate("/");
-        } else {
-          toast.error("Error while feedback");
-        }
+  // ✅ Handle input changes
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  // ✅ Handle star rating
+  const handleStarClick = (rating) => {
+    setFormData({ ...formData, rating });
+  };
+
+  // ✅ Handle form submit
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!formData.user_id || !formData.booking_id || formData.rating === 0) {
+      setAlert({ type: "danger", message: "Please fill all required fields." });
+      return;
+    }
+    try {
+      const response = await axios.post("http://localhost:8080/api/feedback", formData);
+      if (response.status === 200) {
+        setAlert({ type: "success", message: "Feedback submitted successfully!" });
+        setFormData({ user_id: "", booking_id: "", rating: 0, comments: "" });
       }
+    } catch (err) {
+      console.error("Error submitting feedback:", err);
+      setAlert({ type: "danger", message: "Error submitting feedback. Try again later." });
     }
   };
 
   return (
-    <>
-      <div className="container mt-4">
-        <h2>Submit Feedback</h2>
-        <form className="mb-4">
-          <div className="row">
-            <div className="col-md-3">
-              <label>User ID</label>
-              <input
-                type="number"
-                name="user_id"
-                className="form-control"
-                value={userId}
-                disabled
-                readOnly
-              />
-            </div>
+    <div className="container mt-4">
+      <div className="card shadow p-4">
+        <h2 className="text-center mb-3">Submit Feedback</h2>
 
-            <div className="col-md-3">
-              <label>Booking ID</label>
-              <input
-                type="number"
-                name="booking_id"
-                className="form-control"
-                value={bookingId}
-                disabled
-                readOnly
-              />
-            </div>
-            <div className="col-md-2">
-              <label>Rating</label>
-              <select
-                name="rating"
-                className="form-control"
-                value={rating}
-                onChange={(e) => setRating(e.target.value)}
-                required
-              >
-                {[1, 2, 3, 4, 5].map((r) => (
-                  <option key={r} value={r}>
-                    {r}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div className="col-md-4">
-              <label>Comments</label>
-              <input
-                type="text"
-                name="comments"
-                className="form-control"
-                value={comment}
-                onChange={(e) => setComment(e.target.value)}
-              />
+        {alert.message && <div className={`alert alert-${alert.type}`}>{alert.message}</div>}
+
+        <form onSubmit={handleSubmit}>
+
+          {/* ✅ User Selection */}
+          <div className="mb-3">
+            <label className="form-label">User *</label>
+            <select className="form-select" name="user_id" value={formData.user_id} onChange={handleChange} required>
+              <option value="">--Select User--</option>
+              {users.map((user) => (
+                <option key={user.user_id} value={user.user_id}>
+                  {user.name} (ID: {user.user_id})
+                </option>
+              ))}
+            </select>
+          </div>
+
+          {/* ✅ Booking Selection */}
+          <div className="mb-3">
+            <label className="form-label">Booking *</label>
+            <select className="form-select" name="booking_id" value={formData.booking_id} onChange={handleChange} required>
+              <option value="">--Select Booking--</option>
+              {bookings.map((booking) => (
+                <option key={booking.booking_id} value={booking.booking_id}>
+                  Booking #{booking.booking_id} - {booking.flight_name}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          {/* ✅ Star Rating */}
+          <div className="mb-3">
+            <label className="form-label">Rating *</label>
+            <div>
+              {[1, 2, 3, 4, 5].map((star) => (
+                <span
+                  key={star}
+                  style={{
+                    fontSize: "28px",
+                    cursor: "pointer",
+                    color: formData.rating >= star ? "#FFD700" : "#ccc"
+                  }}
+                  onClick={() => handleStarClick(star)}
+                >
+                  ★
+                </span>
+              ))}
             </div>
           </div>
-          <button
-            onClick={onFeedBack}
-            type="submit"
-            className="btn btn-primary mt-3"
-          >
-            Submit
-          </button>
+
+          {/* ✅ Comments */}
+          <div className="mb-3">
+            <label className="form-label">Comments</label>
+            <textarea className="form-control" name="comments" value={formData.comments} onChange={handleChange} placeholder="Write your feedback..."></textarea>
+          </div>
+
+          {/* ✅ Submit Button */}
+          <button type="submit" className="btn btn-primary btn-xl">Submit Feedback</button>
         </form>
       </div>
-    </>
+    </div>
   );
-}
+};
 
 export default CustomerFeedback;
+
+<button type="submit" className="btn btn-primary btn-sm">
+  Submit Feedback
+</button>
+
 
 

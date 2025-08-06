@@ -82,16 +82,14 @@ function AddFlight() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Add your submission logic here
     console.log("Flight scheduled:", formData);
     setShowModal(false);
-    // You would typically update the flights array here
   };
 
   const navigate = useNavigate()
 
   const addflightscheduler = () =>{
-    navigate("/scheduleflight")
+    navigate("/admin/scheduleflight")
   }
 
   return (
@@ -137,8 +135,8 @@ function AddFlight() {
               <td>{flight.adt}</td>
               <td>{flight.ddt}</td>
               <td>₹{flight.cec}</td>
-              <td>{flight.cbc ? `₹${flight.cbc}` : '-'}</td>
-              <td>{flight.cfc ? `₹${flight.cfc}` : '-'}</td>
+              <td>{flight.cbc }</td>
+              <td>{flight.cfc }</td>
               <td>
                 <Button
                 onClick={addflightscheduler}

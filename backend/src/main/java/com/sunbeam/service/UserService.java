@@ -1,4 +1,5 @@
 package com.sunbeam.service;
+<<<<<<< HEAD
 
 import java.time.LocalDate;
 import java.util.List;
@@ -21,4 +22,14 @@ public interface UserService {
     Booking updateBooking(Booking booking);
     void cancelBooking(Long bookingId);
     List<Booking> getAllBookings();
+=======
+
+import com.sunbeam.dto.UserDTO;
+import com.sunbeam.entities.User;
+
+public interface UserService {
+	
+	User register(UserDTO data);
+	User login(String email,String password);
+>>>>>>> main
 }

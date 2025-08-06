@@ -118,7 +118,7 @@ const ScheduleFlight = () => {
       await new Promise(resolve => setTimeout(resolve, 1500));
       
       toast.success('Flight scheduled successfully!');
-      navigate('/flights');
+      navigate('/scheduleflight');
     } catch (error) {
       toast.error('Failed to schedule flight');
     } finally {

@@ -1,62 +1,123 @@
-import React from 'react';
-import { Form, Button, Container, Alert } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
-
+import React, { useState } from "react";
+import {
+  Form,
+  Button,
+  Container,
+  Alert,
+  Card,
+  Row,
+  Col,
+} from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+import { FaPlane, FaArrowLeft, FaCheck } from "react-icons/fa";
+import { toast } from "react-toastify";
+import { addAirline } from "../../services/AdminServices/airlineManagementServies";
 
 const AddAirline = () => {
+  const navigate = useNavigate();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
+  const [airlineName, setAirlineName] = useState("");
+  const [airlineNoOfFlights, setAirlineNoOfFlights] = useState(0);
 
-  const navigate = useNavigate()
+  const submit = async() => {
 
-  const back = () =>{
-    navigate("/airlinemanagement")
-  }
+    const data = await addAirline(airlineName, airlineNoOfFlights);
+    if (!data) {
+      toast.error("Failed to add airline. Please try again.");
+      return;
+    }
+    toast.success("Airline added successfully!");
+    navigate("/admin/airlinemanagement");
+  };
+
+  const handleBack = () => {
+    navigate("/admin/airlinemanagement");
+  };
 
   return (
-    <Container className="mt-5" style={{ maxWidth: '600px' }}>
-      <h2 className="mb-4">Add New Airline</h2>
-      
-      {/* Success message placeholder */}
-      <Alert variant="success" dismissible className="d-none">
-        Airline added successfully!
-      </Alert>
-      
-      {/* Error message placeholder */}
-      <Alert variant="danger" dismissible className="d-none">
-        Error message would appear here
-      </Alert>
-      
-      <Form>
-        <Form.Group className="mb-3" controlId="airlineName">
-          <Form.Label>Airline Name</Form.Label>
-          <Form.Control
-            type="text"
-            name="airline_name"
-            placeholder="Enter airline name"
-          />
-          <Form.Control.Feedback type="invalid" className="d-none">
-            Validation error would appear here
-          </Form.Control.Feedback>
-        </Form.Group>
-        
-        <Form.Group className="mb-3" controlId="flightNumber">
-          <Form.Label>Number of Flights</Form.Label>
-          <Form.Control
-            type="number"
-            name="no_of_flights"
-            placeholder="Enter number of flights"
-            min="0"
-          />
-          <Form.Control.Feedback type="invalid" className="d-none">
-            Validation error would appear here
-          </Form.Control.Feedback>
-        </Form.Group>
-        
-        <Button 
-        onClick={back}
-        variant="primary" type="submit">
-          Add Airline
-        </Button>
-      </Form>
+    <Container className="py-5">
+      <Row className="justify-content-center">
+        <Col md={8} lg={6}>
+          <Card className="shadow-sm">
+            <Card.Header className="bg-primary text-white">
+              <div className="d-flex justify-content-between align-items-center">
+                <Button
+                  variant="link"
+                  className="text-white p-0"
+                  onClick={handleBack}
+                >
+                  <FaArrowLeft className="me-2" />
+                  Back to Airlines
+                </Button>
+                <h4 className="mb-0">
+                  <FaPlane className="me-2" />
+                  Add New Airline
+                </h4>
+              </div>
+            </Card.Header>
+
+            <Card.Body>
+              {showSuccess && (
+                <Alert
+                  variant="success"
+                  dismissible
+                  onClose={() => setShowSuccess(false)}
+                  className="animate__animated animate__fadeIn"
+                >
+                  <FaCheck className="me-2" />
+                  Airline added successfully!
+                </Alert>
+              )}
+
+              <Form onSubmit={submit}>
+                <Form.Group className="mb-4">
+                  <Form.Label className="fw-bold">Airline Name</Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="airlineName"
+                    placeholder="Airline Name"
+                    value={airlineName}
+                    onChange={(e) => setAirlineName(e.target.value)}
+                    required
+                  />
+                </Form.Group>
+
+                <Form.Group className="mb-4">
+                  <Form.Label className="fw-bold">Number of Flights</Form.Label>
+                  <Form.Control
+                    type="number"
+                    name="noOfFlights"
+                    placeholder="e.g. 25"
+                    value={airlineNoOfFlights}
+                    onChange={(e) => setAirlineNoOfFlights(e.target.value)}
+                    min={1}
+                  />
+                </Form.Group>
+
+                <div className="d-grid gap-3">
+                  <Button
+                    variant="primary"
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="py-2 fw-bold"
+                  >
+                    {isSubmitting ? "Adding Airline..." : "Add Airline"}
+                  </Button>
+
+                  <Button
+                    variant="outline-secondary"
+                    onClick={handleBack}
+                    className="py-2"
+                  >
+                    Cancel
+                  </Button>
+                </div>
+              </Form>
+            </Card.Body>
+          </Card>
+        </Col>
+      </Row>
     </Container>
   );
 };

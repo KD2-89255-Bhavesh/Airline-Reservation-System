@@ -1,6 +1,26 @@
 package com.sunbeam.entities;
 
+<<<<<<< HEAD
 import jakarta.persistence.*;
+=======
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
+>>>>>>> main
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -95,6 +115,7 @@ public class Booking {
     @Column(name = "booking_date", nullable = false)
     private LocalDateTime bookingDate;
     
+<<<<<<< HEAD
 
     @UpdateTimestamp
     @Column(name = "updated_at")
@@ -136,6 +157,30 @@ public class Booking {
         public String getDisplayName() {
             return displayName;
         }
+=======
+    @Column(name = "total_amount")
+    private Integer totalAmount;
+    
+    @Column(name = "booking_time")
+    private LocalDateTime bookingTime;
+    
+    @Column(name = "number_of_passenger")
+    private Integer numberOfPassenger;
+    
+    @OneToMany(mappedBy = "booking", cascade = CascadeType.ALL)
+    @JsonManagedReference
+    private List<Passenger> passengers = new ArrayList<>();
+    
+    @OneToOne(mappedBy = "booking", cascade = CascadeType.ALL)
+    private Payment payment;
+    
+    @OneToOne(mappedBy = "booking", cascade = CascadeType.ALL)
+    private Feedback feedback;
+    
+    public void addPassenger(Passenger passenger) {
+        this.passengers.add(passenger);
+        passenger.setBooking(this);
+>>>>>>> main
     }
 
     public enum PaymentMethod {
