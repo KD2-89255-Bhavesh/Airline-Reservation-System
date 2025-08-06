@@ -11,9 +11,9 @@ import com.sunbeam.dao.AddFlightDao;
 import com.sunbeam.dao.AdminBookingDao;
 import com.sunbeam.dao.AdminDao;
 import com.sunbeam.dao.FeedbackDao;
-import com.sunbeam.dao.UserDao;
-import com.sunbeam.dto.AirlineDTO;
-import com.sunbeam.entities.AirlineDetail;
+
+import com.sunbeam.dto.AddAirlineDto;
+
 import com.sunbeam.entities.Feedback;
 import com.sunbeam.entities.User;
 
@@ -53,13 +53,13 @@ public class AdminServiceImpl implements AdminService{
 		return adminBookingDao.count();
 	}
 
-	@Override
-	public long getTotalAmountBooking() {
-		return adminBookingDao.getTotalAmountBookingPassenger();
-	}
+//	@Override
+//	public Double getTotalAmountBooking() {
+//		return adminBookingDao.getTotalAmountBookingPassenger();
+//	}
 
 	@Override
-	public List<AirlineDetail> getAllAirlines() {
+	public List<AddAirlineDto> getAllAirlines() {
 		return airlineDetailsDao.findAll();
 	}
 	
@@ -69,15 +69,7 @@ public class AdminServiceImpl implements AdminService{
 		return feedbackDao.findAll();
 	}
 
-	@Override
-	public AirlineDetail addAirline(AirlineDTO airlineDTO) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public Optional<User> getUserByEmail(String email) {
-        return userRepository.findByEmail(email);
-    }
+	
 
 	
 	

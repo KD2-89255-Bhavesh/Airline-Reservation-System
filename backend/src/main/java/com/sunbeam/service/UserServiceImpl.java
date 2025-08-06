@@ -1,38 +1,104 @@
 package com.sunbeam.service;
 
+
+import java.time.LocalDate;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.sunbeam.dao.BookingRepository;
+import com.sunbeam.dao.ScheduleFlightRepository;
 import com.sunbeam.dao.UserDao;
-import com.sunbeam.dto.UserDTO;
+import com.sunbeam.dto.BookingRequestDto;
+import com.sunbeam.dto.BookingResponseDto;
+import com.sunbeam.dto.FlightSearchResponseDto;
+import com.sunbeam.entities.Booking;
 import com.sunbeam.entities.User;
+
+import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 
 
 @Service
+@Transactional
 public class UserServiceImpl implements UserService{
 	
 	@Autowired
-	private UserDao userDao;
-	
-	public User register(UserDTO data) {
-		User customer = new User();
-		
-		customer.setTitle(data.getTitle());
-		customer.setFirstName(data.getFirstName());
-		customer.setLastName(data.getLastName());
-		customer.setEmail(data.getEmail());
-		customer.setPasswordHash(data.getPasswordHash()); 
-		customer.setMobileNo(data.getMobileNo());
-		customer.setRole(data.getRole());
-        return userDao.save(customer);
-		
-	}
-	
-	
-	public User login(String email, String password) {
-        return userDao.findByEmail(email)
-                .filter(u -> u.getPasswordHash().equals(password))
-                .orElseThrow(() -> new RuntimeException("Invalid credentials"));
+    private ScheduleFlightRepository scheduleRepo;
+
+    @Autowired
+    private BookingRepository bookingRepo;
+
+    @Autowired
+    private ModelMapper modelMapper;
+
+    @Autowired
+    private UserDao userDao;
+    @Override
+    public List<FlightSearchResponseDto> flightSearch(String source, String destination, LocalDate departure) {
+        List<FlightSearchResponseDto> flights = scheduleRepo.searchFlights(source, destination, departure);
+        return flights.stream()
+                .map(flight -> modelMapper.map(flight, FlightSearchResponseDto.class))
+                .collect(Collectors.toList());
     }
-	
+
+    @Override
+    public BookingResponseDto createBooking(BookingRequestDto bookingRequestDTO) {
+        // ✅ Configure ModelMapper to handle User entity mapping
+        modelMapper.typeMap(BookingRequestDto.class, Booking.class)
+                .addMappings(mapper -> {
+                    mapper.skip(Booking::setUser); // Skip the user field during mapping
+                });
+        
+        // Map DTO to Entity (excluding User)
+        Booking booking = modelMapper.map(bookingRequestDTO, Booking.class);
+        
+        // ✅ Manually set the User entity
+        if (bookingRequestDTO.getUserId() != null) {
+            User user = userDao.findById(bookingRequestDTO.getUserId())
+                    .orElseThrow(() -> new EntityNotFoundException("User not found with ID: " + bookingRequestDTO.getUserId()));
+            booking.setUser(user);
+        }
+        
+        Booking savedBooking = bookingRepo.save(booking);
+        return modelMapper.map(savedBooking, BookingResponseDto.class);
+    }
+    @Override
+    public Booking getBookingById(Long bookingId) {
+        // Option 1: Use the custom method (now with correct Long parameter)
+        Optional<Booking> booking = bookingRepo.findByBookingId(bookingId);
+        
+        // Option 2: Use inherited findById method (equivalent since bookingId is @Id)
+        // Optional<Booking> booking = bookingRepo.findById(bookingId);
+        
+        return booking.orElseThrow(() -> 
+            new RuntimeException("Booking not found with ID: " + bookingId));
+    }
+    
+//    @Override
+//    public List<Booking> getBookingsByUserId(Long userId) {
+//        return bookingRepo.findByUserId(userId);
+//    }
+    
+//    @Override
+//    public Booking updateBooking(Booking booking) {
+//        return bookingRepo.save(booking);
+//    }
+//    
+//    @Override
+//    public void cancelBooking(Long bookingId) {
+//        Booking booking = getBookingById(bookingId);
+//        booking.setBookingStatus(Booking.BookingStatus.CANCELLED);
+//        bookingRepo.save(booking);
+//    }
+    
+    @Override
+    public List<Booking> getAllBookings() {
+        return bookingRepo.findAll();
+    }
+
 }

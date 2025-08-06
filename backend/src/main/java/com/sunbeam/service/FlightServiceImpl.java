@@ -35,7 +35,7 @@ public class FlightServiceImpl implements FlightService {
 		AirlineDetail saved = addAirlineDao.save(airlineDetail);
 
 	    AirlineDTO responseDTO = modelMapper.map(saved, AirlineDTO.class);
-	    responseDTO.setAdmin_id(admin.getUserId());
+	    responseDTO.setAdmin_id(admin.getId());
 
 		return responseDTO;
 
