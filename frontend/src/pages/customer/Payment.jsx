@@ -1,3 +1,5 @@
+// Fixed Payment.jsx - Comprehensive null value prevention
+
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { FaCreditCard, FaLock, FaCheckCircle, FaRupeeSign } from 'react-icons/fa';
@@ -34,7 +36,7 @@ const Payment = () => {
       if (location.state?.bookingDetails) {
         const { bookingDetails } = location.state;
         flightData = bookingDetails.flightData || bookingDetails;
-        passengerData = bookingDetails.passengers;
+        passengerData = bookingDetails.passengers || [];
         calculatedTotal = location.state.totalPrice || 0;
       } else {
         const storedFlightData = sessionStorage.getItem('flightBookingData');
@@ -44,34 +46,119 @@ const Payment = () => {
         if (storedFinalBooking) {
           const finalBooking = JSON.parse(storedFinalBooking);
           flightData = {
-            flight: finalBooking.flight,
-            classType: finalBooking.classType,
-            selectedPrice: finalBooking.selectedPrice,
-            searchParams: finalBooking.searchParams
+            flight: finalBooking.flight || {},
+            classType: finalBooking.classType || 'ECONOMY',
+            selectedPrice: finalBooking.selectedPrice || 0,
+            searchParams: finalBooking.searchParams || {}
           };
-          passengerData = finalBooking.passengers;
-          calculatedTotal = finalBooking.totalPrice;
+          passengerData = finalBooking.passengers || [];
+          calculatedTotal = finalBooking.totalPrice || 0;
         } else if (storedFlightData && storedPassengers) {
           flightData = JSON.parse(storedFlightData);
-          passengerData = JSON.parse(storedPassengers);
-          calculatedTotal = passengerData.length * flightData.selectedPrice;
+          passengerData = JSON.parse(storedPassengers) || [];
+          calculatedTotal = passengerData.length * (flightData.selectedPrice || 0);
         }
       }
 
-      if (!flightData || !passengerData || passengerData.length === 0) {
-        console.error('Missing booking data');
+      // Enhanced validation with null checks
+      if (!flightData || !passengerData || !Array.isArray(passengerData) || passengerData.length === 0) {
+        console.error('Missing or invalid booking data:', { flightData, passengerData });
         navigate('/customer/flightlist');
         return;
       }
 
+      // Validate passengers data
+      const validPassengers = passengerData.filter(passenger => 
+        passenger && 
+        typeof passenger === 'object' && 
+        passenger.firstName && 
+        passenger.lastName
+      );
+
+      if (validPassengers.length === 0) {
+        console.error('No valid passengers found:', passengerData);
+        navigate('/customer/flightlist');
+        return;
+      }
+
+      console.log('Valid Flight Data:', flightData);
+      console.log('Valid Passengers:', validPassengers);
+
       setBookingData(flightData);
-      setPassengers(passengerData);
-      setTotalPrice(calculatedTotal);
+      setPassengers(validPassengers);
+      setTotalPrice(calculatedTotal || 0);
     } catch (error) {
       console.error('Error loading booking data:', error);
       navigate('/customer/flightlist');
     }
   }, [navigate, location.state]);
+
+  // Enhanced helper function with comprehensive null checks
+  const extractFlightData = (bookingData) => {
+    console.log('Extracting flight data from:', bookingData);
+    
+    if (!bookingData) {
+      console.error('Booking data is null or undefined');
+      return null;
+    }
+    
+    let flightObj = null;
+    
+    // Priority 1: Check if bookingData.flight exists and has flightNumber
+    if (bookingData.flight && bookingData.flight.flightNumber) {
+      flightObj = { ...bookingData.flight };
+    }
+    // Priority 2: Check if bookingData itself is the flight object
+    else if (bookingData.flightNumber) {
+      flightObj = { ...bookingData };
+    }
+    // Priority 3: Check nested flightData
+    else if (bookingData.flightData && bookingData.flightData.flightNumber) {
+      flightObj = { ...bookingData.flightData };
+    }
+    // Priority 4: Try to construct from available fields
+    else {
+      flightObj = {
+        flightNumber: bookingData.flightNumber || null,
+        airline: bookingData.airline || null,
+        source: bookingData.source || bookingData.from || null,
+        destination: bookingData.destination || bookingData.to || null,
+        departureDate: bookingData.departureDate || bookingData.date || null,
+        departureTime: bookingData.departureTime || bookingData.time || null,
+        arrivalDate: bookingData.arrivalDate || null,
+        arrivalTime: bookingData.arrivalTime || null,
+        price: bookingData.price || bookingData.selectedPrice || 0,
+        id: bookingData.id || bookingData.flightId || null
+      };
+    }
+    
+    // Ensure essential fields are not null
+    if (flightObj) {
+      flightObj = {
+        ...flightObj,
+        flightNumber: flightObj.flightNumber || 'UNKNOWN',
+        airline: flightObj.airline || 'Unknown Airline',
+        source: flightObj.source || 'Unknown Source',
+        destination: flightObj.destination || 'Unknown Destination',
+        departureDate: flightObj.departureDate || new Date().toISOString().split('T')[0],
+        departureTime: flightObj.departureTime || '00:00',
+        arrivalDate: flightObj.arrivalDate || new Date().toISOString().split('T')[0],
+        arrivalTime: flightObj.arrivalTime || '00:00',
+        price: flightObj.price || 0,
+        id: flightObj.id || `temp_${Date.now()}`
+      };
+    }
+    
+    console.log('Final flight object:', flightObj);
+    
+    // Final validation
+    if (!flightObj || !flightObj.flightNumber || flightObj.flightNumber === 'UNKNOWN') {
+      console.error('Invalid flight object - missing critical data:', flightObj);
+      return null;
+    }
+    
+    return flightObj;
+  };
 
   const validateCardNumber = (number) => /^\d{13,19}$/.test(number.replace(/\s/g, ''));
   const validateCVV = (cvv) => /^\d{3,4}$/.test(cvv);
@@ -88,7 +175,7 @@ const Payment = () => {
 
   const handleCardInputChange = (e) => {
     const { name, value } = e.target;
-    let formattedValue = value;
+    let formattedValue = value || '';
 
     if (name === 'cardNumber') {
       formattedValue = formatCardNumber(value);
@@ -108,7 +195,7 @@ const Payment = () => {
   };
 
   const handleUpiChange = (e) => {
-    const value = e.target.value.toLowerCase();
+    const value = (e.target.value || '').toLowerCase();
     setUpiId(value);
 
     if (validationErrors.upiId) {
@@ -120,10 +207,10 @@ const Payment = () => {
     const errors = {};
 
     if (paymentMethod === 'card') {
-      if (!cardDetails.cardholderName.trim()) {
+      if (!cardDetails.cardholderName || !cardDetails.cardholderName.trim()) {
         errors.cardholderName = 'Cardholder name is required';
       }
-      if (!cardDetails.cardNumber.trim()) {
+      if (!cardDetails.cardNumber || !cardDetails.cardNumber.trim()) {
         errors.cardNumber = 'Card number is required';
       } else if (!validateCardNumber(cardDetails.cardNumber)) {
         errors.cardNumber = 'Invalid card number';
@@ -135,13 +222,13 @@ const Payment = () => {
         const cardExpiry = new Date(cardDetails.expiryYear, cardDetails.expiryMonth - 1);
         if (cardExpiry < currentDate) errors.expiryMonth = 'Card has expired';
       }
-      if (!cardDetails.cvv.trim()) {
+      if (!cardDetails.cvv || !cardDetails.cvv.trim()) {
         errors.cvv = 'CVV is required';
       } else if (!validateCVV(cardDetails.cvv)) {
         errors.cvv = 'Invalid CVV';
       }
     } else if (paymentMethod === 'upi') {
-      if (!upiId.trim()) errors.upiId = 'UPI ID is required';
+      if (!upiId || !upiId.trim()) errors.upiId = 'UPI ID is required';
       else if (!validateUPI(upiId)) errors.upiId = 'Invalid UPI ID';
     }
 
@@ -155,48 +242,106 @@ const Payment = () => {
   const handlePaymentSubmit = async (e) => {
     e.preventDefault();
     setError('');
+    
     if (!validateForm()) return;
+
+    // Enhanced flight data extraction with null safety
+    const flightData = extractFlightData(bookingData);
+    
+    if (!flightData) {
+      setError('Flight information is incomplete or invalid. Please go back and select flight again.');
+      console.error('Cannot extract valid flight data from:', bookingData);
+      return;
+    }
+
+    // Validate passengers before proceeding
+    if (!passengers || !Array.isArray(passengers) || passengers.length === 0) {
+      setError('Passenger information is missing. Please go back and add passengers.');
+      return;
+    }
+
+    // Ensure each passenger has required fields
+    const validatedPassengers = passengers.map((passenger, index) => ({
+      firstName: passenger.firstName || `Passenger${index + 1}`,
+      lastName: passenger.lastName || 'Unknown',
+      age: passenger.age || 0,
+      gender: passenger.gender || 'OTHER',
+      email: passenger.email || null,
+      phone: passenger.phone || null,
+      seatNumber: passenger.seatNumber || null,
+      specialRequests: passenger.specialRequests || null
+    }));
+
+    console.log('Validated flight data:', flightData);
+    console.log('Validated passengers:', validatedPassengers);
+
     setIsProcessing(true);
 
     try {
+      // Construct payment data with comprehensive null safety
       const paymentData = {
         bookingDetails: {
-          flight: bookingData.flight || bookingData,
-          classType: bookingData.classType,
-          passengers,
-          totalPrice,
-          searchParams: bookingData.searchParams || {}
+          flight: flightData,
+          classType: bookingData?.classType || 'ECONOMY',
+          passengers: validatedPassengers,
+          totalPrice: totalPrice || 0,
+          searchParams: bookingData?.searchParams || {
+            from: flightData.source,
+            to: flightData.destination,
+            departureDate: flightData.departureDate,
+            passengers: validatedPassengers.length
+          },
+          specialRequests: bookingData?.specialRequests || '',
+          notes: bookingData?.notes || '',
+          departureDate: flightData.departureDate,
+          arrivalDate: flightData.arrivalDate
         },
         paymentInfo: {
-          method: paymentMethod,
+          method: (paymentMethod || 'CARD').toUpperCase(),
           transactionId: generateTransactionId(),
-          amount: totalPrice,
+          amount: totalPrice || 0,
+          currency: 'INR',
           details: paymentMethod === 'card'
             ? {
-                cardNumber: '****' + cardDetails.cardNumber.replace(/\s/g, '').slice(-4),
-                cardholderName: cardDetails.cardholderName
+                cardNumber: '****' + (cardDetails.cardNumber || '').replace(/\s/g, '').slice(-4),
+                cardholderName: cardDetails.cardholderName || 'Unknown'
               }
             : {
-                upiId: upiId
+                upiId: upiId || 'unknown@upi'
               }
         }
       };
 
+      console.log('Payment data being sent:', JSON.stringify(paymentData, null, 2));
+
       const bookingConfirmation = await processPayment(paymentData);
+      
+      console.log('Booking confirmation received:', bookingConfirmation);
+
+      if (!bookingConfirmation || !bookingConfirmation.booking) {
+        throw new Error('Invalid booking confirmation received');
+      }
+
+      // Store booking confirmation with null safety
       sessionStorage.setItem('bookingConfirmation', JSON.stringify(bookingConfirmation));
+      
+      // Clear temporary booking data
       sessionStorage.removeItem('flightBookingData');
       sessionStorage.removeItem('flightBooking_passengers');
       sessionStorage.removeItem('finalBookingData');
 
       setIsSuccess(true);
+      
       setTimeout(() => {
         navigate('/customer/ticketpage', {
           state: {
-            bookingId: bookingConfirmation.bookingId,
+            booking: bookingConfirmation.booking,
+            bookingId: bookingConfirmation.booking?.id || bookingConfirmation.booking?.bookingId || 'unknown',
             fromPayment: true
           }
         });
       }, 2000);
+      
     } catch (err) {
       console.error('Payment error:', err);
       setError(err.message || 'Payment failed. Please try again.');
@@ -205,7 +350,7 @@ const Payment = () => {
     }
   };
 
-  if (!bookingData || !passengers.length) {
+  if (!bookingData || !passengers || passengers.length === 0) {
     return (
       <div className="payment-page">
         <div className="payment-container">
@@ -226,9 +371,9 @@ const Payment = () => {
           <h2>Payment Successful!</h2>
           <p>Your booking has been confirmed. Redirecting to ticket...</p>
           <div className="booking-summary">
-            <p><strong>Amount Paid:</strong> ₹{totalPrice.toLocaleString()}</p>
+            <p><strong>Amount Paid:</strong> ₹{(totalPrice || 0).toLocaleString()}</p>
             <p><strong>Passengers:</strong> {passengers.length}</p>
-            <p><strong>Flight:</strong> {bookingData.flight.flightNumber}</p>
+            <p><strong>Flight:</strong> {bookingData?.flight?.flightNumber || bookingData?.flightNumber || 'Unknown'}</p>
           </div>
         </div>
       </div>
@@ -240,6 +385,17 @@ const Payment = () => {
       <div className="payment-container">
         <h1>PAYMENT</h1>
         {error && <div className="error-message">{error}</div>}
+
+        {/* Debug info - remove in production */}
+        {process.env.NODE_ENV === 'development' && (
+          <div style={{backgroundColor: '#f0f0f0', padding: '10px', margin: '10px 0', fontSize: '12px'}}>
+            <strong>Debug Info:</strong><br/>
+            Flight Number: {bookingData?.flight?.flightNumber || bookingData?.flightNumber || 'Missing'}<br/>
+            Class Type: {bookingData?.classType || 'Missing'}<br/>
+            Passengers: {passengers.length}<br/>
+            Total Price: ₹{(totalPrice || 0).toLocaleString()}
+          </div>
+        )}
 
         <div className="payment-methods">
           <div className={`method-tab ${paymentMethod === 'card' ? 'active' : ''}`} onClick={() => setPaymentMethod('card')}>
@@ -255,18 +411,17 @@ const Payment = () => {
         <div className="divider" />
         <div className="total-fare-box">
           <span>Total Fare:</span>
-          <span>₹{totalPrice.toLocaleString()}</span>
+          <span>₹{(totalPrice || 0).toLocaleString()}</span>
         </div>
 
         {paymentMethod === 'card' ? (
           <form onSubmit={handlePaymentSubmit} className="payment-form">
-            {/* Card Form UI */}
             <div className="form-group">
               <label>Cardholder Name*</label>
               <input
                 type="text"
                 name="cardholderName"
-                value={cardDetails.cardholderName}
+                value={cardDetails.cardholderName || ''}
                 onChange={handleCardInputChange}
                 className={validationErrors.cardholderName ? 'error' : ''}
                 required
@@ -279,7 +434,7 @@ const Payment = () => {
               <input
                 type="text"
                 name="cardNumber"
-                value={cardDetails.cardNumber}
+                value={cardDetails.cardNumber || ''}
                 onChange={handleCardInputChange}
                 maxLength="19"
                 className={validationErrors.cardNumber ? 'error' : ''}
@@ -291,7 +446,7 @@ const Payment = () => {
             <div className="form-row">
               <div className="form-group">
                 <label>Expiry Month*</label>
-                <select name="expiryMonth" value={cardDetails.expiryMonth} onChange={handleCardInputChange} required>
+                <select name="expiryMonth" value={cardDetails.expiryMonth || ''} onChange={handleCardInputChange} required>
                   <option value="">MM</option>
                   {Array.from({ length: 12 }, (_, i) => (
                     <option key={i + 1} value={String(i + 1).padStart(2, '0')}>
@@ -299,17 +454,19 @@ const Payment = () => {
                     </option>
                   ))}
                 </select>
+                {validationErrors.expiryMonth && <span className="error-text">{validationErrors.expiryMonth}</span>}
               </div>
 
               <div className="form-group">
                 <label>Expiry Year*</label>
-                <select name="expiryYear" value={cardDetails.expiryYear} onChange={handleCardInputChange} required>
+                <select name="expiryYear" value={cardDetails.expiryYear || ''} onChange={handleCardInputChange} required>
                   <option value="">YYYY</option>
                   {Array.from({ length: 10 }, (_, i) => {
                     const year = new Date().getFullYear() + i;
                     return <option key={year} value={year}>{year}</option>;
                   })}
                 </select>
+                {validationErrors.expiryYear && <span className="error-text">{validationErrors.expiryYear}</span>}
               </div>
 
               <div className="form-group">
@@ -317,7 +474,7 @@ const Payment = () => {
                 <input
                   type="password"
                   name="cvv"
-                  value={cardDetails.cvv}
+                  value={cardDetails.cvv || ''}
                   onChange={handleCardInputChange}
                   maxLength="4"
                   className={validationErrors.cvv ? 'error' : ''}
@@ -333,17 +490,16 @@ const Payment = () => {
             </div>
 
             <button type="submit" className="pay-button" disabled={isProcessing}>
-              {isProcessing ? 'Processing...' : `Pay ₹${totalPrice.toLocaleString()}`}
+              {isProcessing ? 'Processing...' : `Pay ₹${(totalPrice || 0).toLocaleString()}`}
             </button>
           </form>
         ) : (
           <form onSubmit={handlePaymentSubmit} className="payment-form">
-            {/* UPI Form UI */}
             <div className="form-group">
               <label>UPI ID*</label>
               <input
                 type="text"
-                value={upiId}
+                value={upiId || ''}
                 onChange={handleUpiChange}
                 className={validationErrors.upiId ? 'error' : ''}
                 required
@@ -358,7 +514,7 @@ const Payment = () => {
             </div>
 
             <button type="submit" className="pay-button" disabled={isProcessing}>
-              {isProcessing ? 'Processing...' : `Pay ₹${totalPrice.toLocaleString()}`}
+              {isProcessing ? 'Processing...' : `Pay ₹${(totalPrice || 0).toLocaleString()}`}
             </button>
           </form>
         )}

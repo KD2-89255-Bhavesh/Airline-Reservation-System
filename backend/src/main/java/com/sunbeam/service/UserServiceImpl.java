@@ -3,6 +3,7 @@ package com.sunbeam.service;
 import java.time.LocalDate;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
@@ -65,5 +66,38 @@ public class UserServiceImpl implements UserService {
         
         Booking savedBooking = bookingRepo.save(booking);
         return modelMapper.map(savedBooking, BookingResponseDto.class);
+    }
+    @Override
+    public Booking getBookingById(Long bookingId) {
+        // Option 1: Use the custom method (now with correct Long parameter)
+        Optional<Booking> booking = bookingRepo.findByBookingId(bookingId);
+        
+        // Option 2: Use inherited findById method (equivalent since bookingId is @Id)
+        // Optional<Booking> booking = bookingRepo.findById(bookingId);
+        
+        return booking.orElseThrow(() -> 
+            new RuntimeException("Booking not found with ID: " + bookingId));
+    }
+    
+//    @Override
+//    public List<Booking> getBookingsByUserId(Long userId) {
+//        return bookingRepo.findByUserId(userId);
+//    }
+    
+    @Override
+    public Booking updateBooking(Booking booking) {
+        return bookingRepo.save(booking);
+    }
+    
+    @Override
+    public void cancelBooking(Long bookingId) {
+        Booking booking = getBookingById(bookingId);
+        booking.setBookingStatus(Booking.BookingStatus.CANCELLED);
+        bookingRepo.save(booking);
+    }
+    
+    @Override
+    public List<Booking> getAllBookings() {
+        return bookingRepo.findAll();
     }
 }

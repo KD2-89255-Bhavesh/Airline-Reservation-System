@@ -8,6 +8,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +21,7 @@ import com.sunbeam.dto.BookingResponseDto;
 
 import com.sunbeam.dto.FlightSearchResponseDto;
 import com.sunbeam.dto.UserDTO;
+import com.sunbeam.entities.Booking;
 import com.sunbeam.service.AuthService;
 import com.sunbeam.service.UserService;
 
@@ -53,4 +55,20 @@ public class UserController {
 		BookingResponseDto responseDto = userService.createBooking(bookingRequestDto);
 		return ResponseEntity.ok(responseDto);
 	}
+	 @GetMapping("/{bookingId}")
+	    public ResponseEntity<Booking> getBookingById(@PathVariable String bookingId) {
+	        try {
+	            // Convert String to Long
+	            Long id = Long.parseLong(bookingId);
+	            Booking booking = userService.getBookingById(id);
+	            return ResponseEntity.ok(booking);
+	        } catch (NumberFormatException e) {
+	            return ResponseEntity.badRequest().build();
+	        } catch (RuntimeException e) {
+	            return ResponseEntity.notFound().build();
+	        }
+	    }
+	    
+	    
+	    
 }
