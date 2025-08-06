@@ -380,7 +380,7 @@ const ContactUs = () => {
   const airlines = [
     { 
       name: "Air India", 
-      url: "https://www.airindia.in/contact-us.htm", 
+      url: "https://www.airindia.in/contact-us.html", 
       logo: "https://www.tata.com/content/dam/tata/images/verticals/desktop/airindia_newlivery_card_hz_desktop_390x362.jpg" 
     },
     { 
@@ -403,11 +403,15 @@ const ContactUs = () => {
       url: "https://www.qatarairways.com/en-in/contact-us.html",
       logo: "https://upload.wikimedia.org/wikipedia/en/thumb/9/9b/Qatar_Airways_Logo.svg/1200px-Qatar_Airways_Logo.svg.png" 
     },
-    { 
-      name: "SpiceJet", 
-      url: "https://www.spicejet.com/contact-us.aspx",
-      logo: "https://www.spicejet.com/Content/images/spicejet-logo.png" 
-    }
+    
+      { 
+  name: "SpiceJet", 
+  url: "https://www.spicejet.com/contact-us.aspx",
+
+logo:"https://tse4.mm.bing.net/th/id/OIP.ykg5F5tAAZPNQ_gZgQCI8wHaE8?pid=Api&P=0&h=180"
+}
+    
+   
   ];
 
   const handleChange = (e) => {
@@ -808,17 +812,6 @@ const ContactUs = () => {
                       <p className="text-muted mb-0 lead">Check our comprehensive FAQ section for instant answers to common travel questions</p>
                     </div>
                   </div>
-                </Col>
-                <Col md={4} className="text-md-end mt-3 mt-md-0">
-                  <Button 
-                    variant="primary" 
-                    href="/faq" 
-                    size="lg"
-                    className="px-4 py-2 rounded-pill"
-                  >
-                    <i className="bi bi-arrow-right me-2"></i>
-                    Visit FAQ
-                  </Button>
                 </Col>
               </Row>
             </Card.Body>

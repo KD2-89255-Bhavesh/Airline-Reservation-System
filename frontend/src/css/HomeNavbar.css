@@ -1,16 +1,28 @@
-/* HomeNavbar.css */
+/* HomeNavbar.css - Enhanced with Animations */
 
 .home-navbar {
-  background-color: #2c3e50;
+  background: linear-gradient(135deg, #2c3e50 0%, #1a2530 100%);
   color: white;
   padding: 0.8rem 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
   position: sticky;
   top: 0;
   z-index: 1000;
+  animation: fadeInDown 0.5s ease-out;
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* Logo and Brand Section */
@@ -19,6 +31,11 @@
   align-items: center;
   gap: 12px;
   min-width: 200px;
+  transition: transform 0.3s ease;
+}
+
+.navbar-brand:hover {
+  transform: scale(1.02);
 }
 
 .navbar-logo {
@@ -26,6 +43,13 @@
   width: auto;
   object-fit: contain;
   border-radius: 4px;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.navbar-logo:hover {
+  transform: rotate(5deg) scale(1.05);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
 .brand-text {
@@ -47,6 +71,11 @@
   font-weight: 400;
   color: #bdc3c7;
   margin: 0;
+  transition: all 0.3s ease;
+}
+
+.navbar-brand:hover .project-tagline {
+  color: #3498db;
 }
 
 /* Navigation Links */
@@ -61,13 +90,29 @@
   text-decoration: none;
   font-weight: 500;
   font-size: 0.95rem;
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
   padding: 0.5rem 0;
   position: relative;
 }
 
+.nav-link::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: #3498db;
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover::before {
+  width: 100%;
+}
+
 .nav-link:hover {
-  color: #3498db;
+  color: white;
+  transform: translateY(-2px);
 }
 
 .nav-link.active {
@@ -75,15 +120,9 @@
   font-weight: 600;
 }
 
-.nav-link.active::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
+.nav-link.active::before {
   width: 100%;
-  height: 2px;
   background-color: #3498db;
-  border-radius: 2px;
 }
 
 /* Login Button */
@@ -92,10 +131,11 @@
   align-items: center;
   min-width: 200px;
   justify-content: flex-end;
+  gap: 1rem;
 }
 
 .login-btn {
-  background-color: transparent;
+  background-color: rgba(255, 255, 255, 0.1);
   color: white;
   border: 1px solid rgba(255, 255, 255, 0.3);
   padding: 0.5rem 1.5rem;
@@ -103,11 +143,30 @@
   text-decoration: none;
   font-weight: 500;
   transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.login-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: 0.5s;
 }
 
 .login-btn:hover {
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(255, 255, 255, 0.2);
   border-color: rgba(255, 255, 255, 0.5);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.login-btn:hover::before {
+  left: 100%;
 }
 
 /* Mobile Menu Toggle */
@@ -118,6 +177,12 @@
   color: white;
   font-size: 1.5rem;
   cursor: pointer;
+  transition: transform 0.3s ease;
+  padding: 0.5rem;
+}
+
+.mobile-menu-toggle:hover {
+  transform: scale(1.2);
 }
 
 /* Responsive Design */
@@ -134,7 +199,9 @@
     overflow: hidden;
     flex-direction: column;
     gap: 0;
-    transition: max-height 0.3s ease;
+    transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    background-color: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
   }
 
   .nav-links.active {
@@ -147,10 +214,11 @@
   .nav-link {
     padding: 0.8rem 1rem;
     width: 100%;
+    text-align: center;
   }
 
-  .nav-link.active::after {
-    display: none;
+  .nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.1);
   }
 
   .mobile-menu-toggle {

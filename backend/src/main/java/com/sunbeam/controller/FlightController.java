@@ -16,12 +16,12 @@ import com.sunbeam.service.FlightServiceImpl;
 @CrossOrigin(origins = "http://localhost:3000")
 public class FlightController {
 	
-	@Autowired
-	public FlightServiceImpl flightServiceImpl;
-
-	@PostMapping("/addairline")
-	public ResponseEntity<?> addAirline(@RequestBody AirlineDTO dto) {
-        return ResponseEntity.ok(flightServiceImpl.addAirline(dto));
-    }
+//	@Autowired
+//	public FlightServiceImpl flightServiceImpl;
+//
+//	@PostMapping("/addairline")
+//	public ResponseEntity<?> addAirline(@RequestBody AirlineDTO dto) {
+//        return ResponseEntity.ok(flightServiceImpl.addAirline(dto));
+//    }
 	
 }

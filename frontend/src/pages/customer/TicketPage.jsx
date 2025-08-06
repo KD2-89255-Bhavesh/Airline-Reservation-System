@@ -12,7 +12,7 @@ import {
   getBookingById, 
   sendBookingConfirmationEmail, 
   //generateTicketPDF 
-} from '../../services/customerService/bookingService';
+} from '../../services/customerService/ticketService';
 import '../../CSS/TicketPage.css';
 
 const TicketPage = () => {

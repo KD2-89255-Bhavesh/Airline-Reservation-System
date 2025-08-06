@@ -148,7 +148,7 @@ public class Booking {
 		}
 
 		@Column(name = "total_amount")
-		private Integer totalAmount;
+		private Long totalAmount;
 
 		@Column(name = "booking_time")
 		private LocalDateTime bookingTime;
