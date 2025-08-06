@@ -3,8 +3,6 @@ package com.sunbeam.entities;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -18,7 +16,6 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -31,7 +28,6 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AddFlights {
-<<<<<<< HEAD
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -71,7 +67,6 @@ public class AddFlights {
         economy, business, first
     }
 
-    // Optional: calculate total before persisting if DB doesn't handle it
     @PrePersist
     public void calculateTotalSeats() {
         if (totalNoOfSeats == null) {
@@ -79,39 +74,6 @@ public class AddFlights {
                            + (noOfFirstSeats != null ? noOfFirstSeats : 0L)
                            + (noOfBusinessSeats != null ? noOfBusinessSeats : 0L);
         }
-=======
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long flightId;
-	@ManyToOne
-	@JoinColumn(name="airline_id",nullable=false)
-	private AirlineDetail airlineDetail;
-	@ManyToOne
-	@JoinColumn(name="admin_id")
-	private User admin;
 	
-	@Column(name="flight_no",nullable=false,length=10)
-	private String flightNo;
-	
-	@Enumerated(EnumType.STRING)
-	@Column(name="flight_has")
-	private FlightClass flightHas;
-	
-	@Column(name="no_of_economy_seats", columnDefinition="INT DEFAULT 0")
-	private Long noOFEconomySeats;
-	@Column(name="no_of_first_seats", columnDefinition="INT DEFAULT 0")
-	private Long noOFFirstSeats;
-	@Column(name="no_of_business_seats", columnDefinition = "INT DEFAULT 0")
-	private Long noOFBusinessSeats;
-	@Column(name="total_no_of_seats", insertable = false, updatable=false)
-	private Long totalNoOfSeats;
-	
-	@OneToMany(mappedBy="flight",cascade=CascadeType.ALL)
-	@JsonIgnore
-	private List<ScheduleFlight> schedules = new ArrayList<>();
-	
-    public enum FlightClass{
-    	economy,business,first
->>>>>>> main
     }
 }

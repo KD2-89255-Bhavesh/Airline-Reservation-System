@@ -1,8 +1,7 @@
 package com.sunbeam.service;
 
-<<<<<<< HEAD
-import java.time.LocalDate;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -15,20 +14,20 @@ import com.sunbeam.dao.BookingRepository;
 import com.sunbeam.dao.ScheduleFlightRepository;
 import com.sunbeam.dao.UserDao;
 import com.sunbeam.dto.BookingRequestDto;
-
 import com.sunbeam.dto.BookingResponseDto;
-
 import com.sunbeam.dto.FlightSearchResponseDto;
 import com.sunbeam.entities.Booking;
 import com.sunbeam.entities.User;
 
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 
 
 @Service
-public class UserServiceImpl implements UserService {
-
-    @Autowired
+@Transactional
+public class UserServiceImpl implements UserService{
+	
+	@Autowired
     private ScheduleFlightRepository scheduleRepo;
 
     @Autowired
@@ -85,58 +84,21 @@ public class UserServiceImpl implements UserService {
 //        return bookingRepo.findByUserId(userId);
 //    }
     
-    @Override
-    public Booking updateBooking(Booking booking) {
-        return bookingRepo.save(booking);
-    }
-    
-    @Override
-    public void cancelBooking(Long bookingId) {
-        Booking booking = getBookingById(bookingId);
-        booking.setBookingStatus(Booking.BookingStatus.CANCELLED);
-        bookingRepo.save(booking);
-    }
+//    @Override
+//    public Booking updateBooking(Booking booking) {
+//        return bookingRepo.save(booking);
+//    }
+//    
+//    @Override
+//    public void cancelBooking(Long bookingId) {
+//        Booking booking = getBookingById(bookingId);
+//        booking.setBookingStatus(Booking.BookingStatus.CANCELLED);
+//        bookingRepo.save(booking);
+//    }
     
     @Override
     public List<Booking> getAllBookings() {
         return bookingRepo.findAll();
-=======
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import com.sunbeam.dao.UserDao;
-import com.sunbeam.dto.UserDTO;
-import com.sunbeam.entities.User;
-
-import jakarta.transaction.Transactional;
-
-
-@Service
-@Transactional
-public class UserServiceImpl implements UserService{
-	
-	@Autowired
-	private UserDao userDao;
-	
-	public User register(UserDTO data) {
-		User customer = new User();
-		
-		customer.setTitle(data.getTitle());
-		customer.setFirstName(data.getFirstName());
-		customer.setLastName(data.getLastName());
-		customer.setEmail(data.getEmail());
-		customer.setPasswordHash(data.getPasswordHash()); 
-		customer.setMobileNo(data.getMobileNo());
-		customer.setRole(data.getRole());
-        return userDao.save(customer);
-		
-	}
-	
-	
-	public User login(String email, String password) {
-		return userDao.findByEmail(email)
-	            .filter(u -> u.getPasswordHash().equals(password))
-	            .orElseThrow(() -> new RuntimeException("Invalid credentials"));
->>>>>>> main
     }
+
 }
