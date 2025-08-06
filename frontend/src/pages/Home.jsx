@@ -3,24 +3,22 @@ import { Outlet } from 'react-router-dom';
 import HomeNavbar from '../components/HomeNavbar';
 import '../CSS/Home.css';
 import FlightSearch from './customer/FlightSearch';
-import AdminNavbar from '../components/AdminNavbar';
-import AdminDashboard from './dashboards/AdminDashboard';
-
-
 
 function Home() {
   return (
-    <>
-      <HomeNavbar />
-      <FlightSearch/>
-      <main className='main-content'>
-        <Outlet />
-      </main>
-
-      
-
-      
-    </>
+    <div className="airline-home-background">
+      <div className="content-overlay">
+        <HomeNavbar />
+        <div className="main-content">
+          <div className="center-content">
+            <FlightSearch /> {/* Your existing component remains untouched */}
+          </div>
+        </div>
+        <main className="main-content">
+          <Outlet />
+        </main>
+      </div>
+    </div>
   );
 }
 

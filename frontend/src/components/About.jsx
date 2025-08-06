@@ -369,7 +369,8 @@ function About() {
     {
       name: "Air India Express",
       description: "Low-cost international specialist",
-      imageUrl: "https://pbs.twimg.com/media/DAbdHlRW0AAxgxq.jpg",
+      //imageUrl: "https://pbs.twimg.com/media/DAbdHlRW0AAxgxq.jpg",
+      imageUrl: "https://aviationa2z.com/wp-content/uploads/2023/12/ga114et3-1024x576.png",
       features: ["Budget fares", "Reliable service", "Growing fleet"],
       rating: 4.0,
       url: "https://www.airindiaexpress.in/"
@@ -626,7 +627,7 @@ function About() {
               <div className="bg-primary text-white p-5 rounded-3 h-100">
                 <h3 className="fw-bold mb-4">Need Personalized Assistance?</h3>
                 <p className="mb-4">Our travel experts are available 24/7 to help you plan your perfect journey.</p>
-                <Button variant="light" size="lg" className="px-4" href="/contact">
+                <Button variant="light" size="lg" className="px-4" href="/contactus">
                   <i className="bi bi-telephone-outbound me-2"></i> Contact Us
                 </Button>
               </div>

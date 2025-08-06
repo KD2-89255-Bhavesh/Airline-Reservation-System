@@ -1,5 +1,5 @@
 package com.sunbeam.entities;
 
 public enum Role {
-	 admin,customer;
+	 ROLE_USER,ROLE_ADMIN
 }
