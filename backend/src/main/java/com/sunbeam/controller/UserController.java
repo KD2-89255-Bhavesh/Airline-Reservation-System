@@ -40,8 +40,7 @@ public class UserController {
 	public ResponseEntity<?> registerUser(@RequestBody UserDTO dto) {
 		return ResponseEntity.ok(authService.register(dto));
 	}
-
-
+	
 
 	@GetMapping("/flightlist")
 	public ResponseEntity<List<FlightSearchResponseDto>> searchFlights(@RequestParam String from,
