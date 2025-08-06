@@ -61,15 +61,10 @@ public class ScheduleFlight {
 	private Long seatCostOfBusiness;
 	    
 	@Column(name = "seat_cost_of_first")
-<<<<<<< HEAD
 	private Long seatCostOfFirst;
-	   
-=======
-	private Integer seatCostOfFirst;
 	    
 	@OneToMany(mappedBy = "schFlight", cascade = CascadeType.ALL)
 	@JsonIgnore
 	private List<Booking> bookings = new ArrayList<>();
->>>>>>> main
 
 }
