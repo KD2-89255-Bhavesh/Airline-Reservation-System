@@ -20,6 +20,7 @@ import com.sunbeam.dto.BookingRequestDto;
 import com.sunbeam.dto.BookingResponseDto;
 
 import com.sunbeam.dto.FlightSearchResponseDto;
+import com.sunbeam.dto.SignInRequest;
 import com.sunbeam.dto.UserDTO;
 import com.sunbeam.entities.Booking;
 import com.sunbeam.service.AuthService;
@@ -39,6 +40,11 @@ public class UserController {
 	@PostMapping("/register")
 	public ResponseEntity<?> registerUser(@RequestBody UserDTO dto) {
 		return ResponseEntity.ok(authService.register(dto));
+	}
+
+	@PostMapping("/login")
+	public ResponseEntity<?> login(@RequestBody SignInRequest loginRequest) {
+	    return ResponseEntity.ok(authService.login(loginRequest.getEmail(), loginRequest.getPassword()));
 	}
 
 
@@ -69,6 +75,8 @@ public class UserController {
 	        }
 	    }
 	    
+	 
+	 
 	    
 	    
 }
