@@ -63,8 +63,8 @@ public class ScheduleFlight {
 	@Column(name = "seat_cost_of_first")
 	private Long seatCostOfFirst;
 	    
-	@OneToMany(mappedBy = "schFlight", cascade = CascadeType.ALL)
-	@JsonIgnore
-	private List<Booking> bookings = new ArrayList<>();
+//	@OneToMany(mappedBy = "schFlight", cascade = CascadeType.ALL)
+//	@JsonIgnore
+//	private List<Booking> bookings = new ArrayList<>();
 
 }

@@ -8,6 +8,6 @@ import com.sunbeam.entities.Booking;
 
 @Repository
 public interface AdminBookingDao extends JpaRepository<Booking, Long>{
-	@Query("select sum(totalAmount) from Booking")
-	long getTotalAmountBookingPassenger();
+//	@Query("select sum(totalAmount) from Booking")
+//	Double getTotalAmountBookingPassenger();
 }

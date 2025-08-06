@@ -24,12 +24,6 @@ import AddFlights from "./pages/admin/Addflight";
 import AddScheduleFlight from "./pages/admin/AddScheduleFlight";
 import FlightSearch from "./pages/customer/FlightSearch";
 import AdminNavbar from "./components/AdminNavbar";
-<<<<<<< HEAD
-import AdminLayout from './pages/admin/AdminLayout';
-// import CustomerFeedback from './pages/feedback/CustomerFeedback';
-import AdminLogin from './pages/admin/auth/Login';
-
-=======
 import AdminLayout from "./pages/admin/AdminLayout";
 import CustomerFeedback from "./pages/feedback/CustomerFeedback";
 import AdminLogin from "./pages/admin/auth/Login";
@@ -37,7 +31,6 @@ import AddFlight from "./pages/admin/Addflight";
 import AdminViewFeedbackTable from "./pages/admin/auth/AdminViewFeedback";
 import PerformanceChart from "./components/PerformanceChart";
 import BaseLogin from "./components/auth/BaseLogin";
->>>>>>> main
 
 function App() {
   return (
