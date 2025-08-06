@@ -11,7 +11,7 @@ public interface AdminService {
 	long getTotalAirlinesCount();
 	long getTotalFlightsCount();
 	long getTotalBooking();
-	long getTotalAmountBooking();
+//	Double getTotalAmountBooking();
 	List<AirlineDetail> getAllAirlines();
 	List<Feedback> getAllFeedback();
 }

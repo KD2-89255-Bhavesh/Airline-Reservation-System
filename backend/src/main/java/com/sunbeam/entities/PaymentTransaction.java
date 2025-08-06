@@ -1,6 +1,7 @@
 package com.sunbeam.entities;
 
 import java.math.BigDecimal;
+
 import java.time.LocalDateTime;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -38,9 +39,9 @@ public class PaymentTransaction {
     @Column(name = "transaction_id", unique = true, nullable = false)
     private String transactionId;
 
-//    @Column(name = "payment_method", nullable = false)
-//    @Enumerated(EnumType.STRING)
-//    private Booking.PaymentMethod paymentMethod;
+    @Column(name = "payment_method", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private Booking.PaymentMethod paymentMethod;
 
     @Column(name = "amount", nullable = false, precision = 10, scale = 2)
     private BigDecimal amount;
