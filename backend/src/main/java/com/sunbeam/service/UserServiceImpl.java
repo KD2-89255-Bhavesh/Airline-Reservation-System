@@ -10,14 +10,17 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.sunbeam.dao.BookingRepository;
-import com.sunbeam.dao.ScheduleFlightRepository;
+import com.sunbeam.dao.BookingDao;
+import com.sunbeam.dao.ProfileDao;
+import com.sunbeam.dao.ScheduleFlightDao;
 import com.sunbeam.dao.UserDao;
-import com.sunbeam.dto.BookingRequestDto;
-import com.sunbeam.dto.BookingResponseDto;
-import com.sunbeam.dto.FlightSearchResponseDto;
 import com.sunbeam.entities.Booking;
 import com.sunbeam.entities.User;
+import com.sunbeam.request.BookingRequestDto;
+import com.sunbeam.response.ApiResponse;
+import com.sunbeam.response.BookingResponseDto;
+import com.sunbeam.response.FlightSearchResponseDto;
+import com.sunbeam.response.ProfileResponseDto;
 
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
@@ -28,16 +31,20 @@ import jakarta.transaction.Transactional;
 public class UserServiceImpl implements UserService{
 	
 	@Autowired
-    private ScheduleFlightRepository scheduleRepo;
+    private ScheduleFlightDao scheduleRepo;
 
     @Autowired
-    private BookingRepository bookingRepo;
+    private BookingDao bookingRepo;
 
     @Autowired
     private ModelMapper modelMapper;
 
     @Autowired
     private UserDao userDao;
+    
+    @Autowired
+    private ProfileDao profileDao;
+    
     @Override
     public List<FlightSearchResponseDto> flightSearch(String source, String destination, LocalDate departure) {
         List<FlightSearchResponseDto> flights = scheduleRepo.searchFlights(source, destination, departure);
@@ -99,6 +106,17 @@ public class UserServiceImpl implements UserService{
     @Override
     public List<Booking> getAllBookings() {
         return bookingRepo.findAll();
+    }
+
+    @Override
+    public ApiResponse<ProfileResponseDto> getUserProfile(Long id) {
+        Optional<User> optionalUser = profileDao.findById(id);
+        if (optionalUser.isEmpty()) {
+            return new ApiResponse<>(true, "User not found",null);
+        }
+
+        ProfileResponseDto dto = modelMapper.map(optionalUser.get(), ProfileResponseDto.class);
+        return new ApiResponse<>(true, "Profile fetched successfully",dto);
     }
 
 }

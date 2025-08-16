@@ -46,9 +46,8 @@ public class Passenger {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "booking_id")
-    @JsonManagedReference
     private Booking booking;
 
     @Column(name = "name", nullable = false)
@@ -73,6 +72,9 @@ public class Passenger {
     @Column(name = "meal_preference")
     @Enumerated(EnumType.STRING)
     private MealPreference mealPreference;
+    
+    @Column(name = "date_of_birth")
+    private LocalDate dateOfBirth;
 
     @CreationTimestamp
     @Column(name = "created_at")

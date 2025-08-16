@@ -6,7 +6,7 @@ import com.sunbeam.entities.PaymentTransaction;
 
 import java.util.Optional;
 
-public interface PaymentTransactionRepository extends JpaRepository<PaymentTransaction, Long> {
+public interface PaymentTransactionDao extends JpaRepository<PaymentTransaction, Long> {
     Optional<PaymentTransaction> findByTransactionId(String transactionId);
 }
 

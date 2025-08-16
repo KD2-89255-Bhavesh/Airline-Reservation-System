@@ -7,6 +7,8 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
+import com.sunbeam.request.PassengerRequestDto;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -25,5 +27,5 @@ public class BookingDetailsDto {
     private String classType;
     private Integer totalPassengers;
     private String bookingStatus;
-    private List<PassengerDto> passengers;
+    private List<PassengerRequestDto> passengers;
 }

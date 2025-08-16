@@ -1,6 +1,6 @@
 package com.sunbeam.entities;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -34,7 +34,7 @@ public class AirlineDetail {
 	private Long noOfFlights;
 	
 	@Column(name="date",nullable=false)
-	private LocalDate date;
+	private LocalDateTime date;
 	
 	@ManyToOne
 	@JoinColumn(name="admin_id")

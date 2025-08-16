@@ -12,10 +12,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.sunbeam.dto.AirlineDTO;
+import com.sunbeam.dto.FeedbackDto;
 import com.sunbeam.entities.AirlineDetail;
 import com.sunbeam.entities.Feedback;
 import com.sunbeam.entities.User;
+import com.sunbeam.response.AirlineResponseDto;
+import com.sunbeam.response.ApiResponse;
 import com.sunbeam.service.AdminServiceImpl;
 
 
@@ -44,29 +46,23 @@ public class AdminController {
 		return ResponseEntity.ok(adminService.getTotalBooking());
 	}
 	
-//	@GetMapping("/airlines/totalAmountBooking")
-//	public ResponseEntity<Double> countTotalAmountBooking(){
-//		return ResponseEntity.ok(adminService.getTotalAmountBooking());
-//	}
+	@GetMapping("/airlines/totalAmountBooking")
+	public ResponseEntity<Double> countTotalAmountBooking(){
+		return ResponseEntity.ok(adminService.getTotalAmountBooking());
+	}
 	
-	@GetMapping("/airlineManagement")
-    public ResponseEntity<List<AirlineDetail>> getAllAirlines() {
-        List<AirlineDetail> airlines = adminService.getAllAirlines();
+	@GetMapping("/allairline")
+    public ResponseEntity<List<AirlineResponseDto>> getAllAirlines() {
+        List<AirlineResponseDto> airlines = adminService.getAllAirlines();
         return ResponseEntity.ok(airlines);
     }
 	
 	@GetMapping("/feedback")
-	public ResponseEntity<List<Feedback>> getAllFeedback(){
-		List<Feedback> feedback = adminService.getAllFeedback();
+	public ResponseEntity<ApiResponse<List<FeedbackDto>>> getAllFeedback(){
+		ApiResponse<List<FeedbackDto>> feedback = adminService.getAllFeedback();
 		return ResponseEntity.ok(feedback);
 	}
 	
-	@GetMapping("/profile")
-	public ResponseEntity<?> getUserByEmail(@RequestParam String email) {
-	    return adminService.getUserByEmail(email)
-	            .map(user -> ResponseEntity.ok().body(user))
-	            .orElseThrow();
-	}
 
 	
 }

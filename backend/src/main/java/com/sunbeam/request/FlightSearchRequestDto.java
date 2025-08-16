@@ -1,4 +1,4 @@
-package com.sunbeam.dto;
+package com.sunbeam.request;
 
 import java.time.LocalDate;
 

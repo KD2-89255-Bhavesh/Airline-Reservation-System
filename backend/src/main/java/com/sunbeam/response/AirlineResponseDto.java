@@ -1,6 +1,6 @@
-package com.sunbeam.dto;
+package com.sunbeam.response;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,9 +11,8 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class AirlineDTO {
+public class AirlineResponseDto {
     private String airlineName;
     private int noOfFlights;
-    private LocalDate date;
-    private long admin_id;
+    private LocalDateTime date;
 }

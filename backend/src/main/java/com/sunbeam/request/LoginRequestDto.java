@@ -1,4 +1,4 @@
-package com.sunbeam.dto;
+package com.sunbeam.request;
 
 import org.hibernate.validator.constraints.Length;
 
@@ -16,7 +16,7 @@ import lombok.ToString;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class SignInRequest {
+public class LoginRequestDto {
 	
 	
 	 @NotBlank(message = "Email can't be blank")

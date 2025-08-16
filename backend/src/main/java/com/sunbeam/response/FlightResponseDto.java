@@ -1,4 +1,4 @@
-package com.sunbeam.dto;
+package com.sunbeam.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,13 +9,8 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class FlightDTO {
-    private Long flightId;
+public class FlightResponseDto {
     private Long airlineId;
     private String flightNo;
-    private String flightClass;
-    private Long noOfEconomySeats;
-    private Long noOfBusinessSeats;
-    private Long noOfFirstSeats;
     private Long totalNoOfSeats;
 }

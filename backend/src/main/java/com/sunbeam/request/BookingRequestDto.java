@@ -1,4 +1,4 @@
-package com.sunbeam.dto;
+package com.sunbeam.request;
 
 
 import java.math.BigDecimal;
@@ -38,7 +38,7 @@ public class BookingRequestDto {
     private BigDecimal totalFare;
 
     // Passenger Info
-    private List<PassengerDto> passengers;
+    private List<PassengerRequestDto> passengers;
 
     // Payment Info
     private PaymentMethod paymentMethod;

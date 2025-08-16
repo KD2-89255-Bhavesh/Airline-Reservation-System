@@ -1,4 +1,4 @@
-package com.sunbeam.dto;
+package com.sunbeam.response;
 
 import java.sql.Date;
 import java.sql.Time;
