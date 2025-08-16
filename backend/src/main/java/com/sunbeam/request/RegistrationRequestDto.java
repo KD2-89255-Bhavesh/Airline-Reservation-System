@@ -1,6 +1,5 @@
-package com.sunbeam.dto;
+package com.sunbeam.request;
 
-import com.sunbeam.entities.Role;
 import com.sunbeam.entities.Title;
 
 import lombok.AllArgsConstructor;
@@ -8,17 +7,16 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserDTO {
-	private Long userId;
+public class RegistrationRequestDto {
 	private Title title;
     private String firstName;
     private String lastName;
     private String email;
     private String mobileNo;
-    private String passwordHash;
-    private Role role;
+    private String password;
 }

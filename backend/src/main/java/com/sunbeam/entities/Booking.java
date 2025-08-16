@@ -44,11 +44,10 @@ public class Booking {
 //    @Column(name = "pnr", unique = true, nullable = false)
 //    private String pnr;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "user_id", nullable = false)
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "user_id")
 	private User user;
 
-	// Flight Information
 	@Column(name = "flight_id")
 	private Long flightId;
 

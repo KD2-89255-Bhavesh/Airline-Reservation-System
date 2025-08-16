@@ -1,14 +1,15 @@
 package com.sunbeam.dao;
 
 
-import org.springframework.data.jpa.repository.JpaRepository;
-
-import com.sunbeam.entities.Booking;
-
 import java.util.List;
 import java.util.Optional;
 
-public interface BookingRepository extends JpaRepository<Booking, Long> {
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
+import com.sunbeam.entities.Booking;
+
+public interface BookingDao extends JpaRepository<Booking, Long> {
     Optional<Booking> findByBookingId(Long bookingId);
     
     // Alternative: Since bookingId is the primary key (@Id), you can also use:
@@ -19,6 +20,10 @@ public interface BookingRepository extends JpaRepository<Booking, Long> {
     List<Booking> findByFlightNumber(String flightNumber);
     List<Booking> findByBookingStatus(Booking.BookingStatus bookingStatus);
     List<Booking> findByTransactionId(String transactionId);
+    
+    @Query("select sum(totalFare) from Booking")
+	Double getTotalAmountBookingPassenger();
+    
 }
 
 

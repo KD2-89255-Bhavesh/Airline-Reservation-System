@@ -1,14 +1,14 @@
-package com.sunbeam.dto;
+package com.sunbeam.response;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+
+@Getter
+@Setter
 @NoArgsConstructor
-public class SignInResponse {
-	
+public class LoginResponseDto {
 	private String jwt;
 	private long customerId;
-
 }

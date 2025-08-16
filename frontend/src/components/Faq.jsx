@@ -3,7 +3,7 @@ import { Container, Card, Form, Button, ListGroup, Badge } from 'react-bootstrap
 import { FaRobot, FaPaperPlane, FaTimes, FaSearch } from 'react-icons/fa';
 import { motion, AnimatePresence } from 'framer-motion';
 import { TypeAnimation } from 'react-type-animation';
-import '../css/Faq.css';
+import '../css/Faq.css'
 
 const FAQChatbot = () => {
   const [isOpen, setIsOpen] = useState(false);

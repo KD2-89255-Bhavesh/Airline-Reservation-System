@@ -1,6 +1,10 @@
-package com.sunbeam.dto;
+package com.sunbeam.request;
+
+import java.time.LocalDate;
 
 import com.sunbeam.entities.Passenger;
+import com.sunbeam.entities.Passenger.Gender;
+import com.sunbeam.entities.Passenger.MealPreference;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,12 +15,14 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class PassengerDto {
+public class PassengerRequestDto {
+	private Long bookingId;         
     private String name;
     private Integer age;
-    private Passenger.Gender gender;
+    private Gender gender;
     private String seatNumber;
     private String passportNumber;
     private String specialRequests;
-    private Passenger.MealPreference mealPreference;
+    private MealPreference mealPreference;
+    private LocalDate dateOfBirth;
 }

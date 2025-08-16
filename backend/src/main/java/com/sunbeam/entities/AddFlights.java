@@ -44,9 +44,15 @@ public class AddFlights {
     @Column(name = "flight_no", nullable = false, length = 10)
     private String flightNo;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "flight_has")
-    private FlightClass flightHas;
+    @Column(name = "has_economy", nullable = false)
+    private boolean hasEconomy = false;
+
+    @Column(name = "has_business", nullable = false)
+    private boolean hasBusiness = false;
+
+    @Column(name = "has_first", nullable = false)
+    private boolean hasFirst = false;
+
 
     @Column(name = "no_of_economy_seats")
     private Long noOfEconomySeats = 0L;
@@ -63,9 +69,6 @@ public class AddFlights {
     @OneToMany(mappedBy = "flight", cascade = CascadeType.ALL)
     private List<ScheduleFlight> schedules = new ArrayList<>();
 
-    public enum FlightClass {
-        economy, business, first
-    }
 
     @PrePersist
     public void calculateTotalSeats() {

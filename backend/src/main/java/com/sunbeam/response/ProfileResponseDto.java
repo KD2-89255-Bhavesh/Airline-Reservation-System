@@ -1,15 +1,11 @@
-package com.sunbeam.dto;
+package com.sunbeam.response;
 
-import com.sunbeam.entities.Title;
-
-import jakarta.persistence.Column;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class ProfileDTO {
-    private Title title;
+public class ProfileResponseDto{
 	private String firstName;
 	private String lastName;
 	private String email;

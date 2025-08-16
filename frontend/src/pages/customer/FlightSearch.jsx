@@ -14,9 +14,7 @@ const FlightSearch = () => {
   const calculateDuration = (departureTime, arrivalTime) => {
     const dep = new Date(`2000-01-01T${departureTime}`);
     const arr = new Date(`2000-01-01T${arrivalTime}`);
-    
     if (arr < dep) arr.setDate(arr.getDate() + 1);
-    
     const diffMs = arr - dep;
     const hours = Math.floor(diffMs / (1000 * 60 * 60));
     const minutes = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60));
@@ -28,17 +26,16 @@ const FlightSearch = () => {
     setIsSearching(true);
 
     try {
-
       const flights = await searchFlights(from, to, departureDate);
       navigate('/flightlist', { state: { flights } });
-      const apiFlights = await searchFlights(from, to, departureDate);
 
+      const apiFlights = await searchFlights(from, to, departureDate);
       if (!apiFlights || apiFlights.length === 0) {
-        alert("No flights found for your search criteria.");
+        alert('No flights found for your search criteria.');
         return;
       }
 
-      const transformedFlights = apiFlights.map(flight => ({
+      const transformedFlights = apiFlights.map((flight) => ({
         flightNumber: flight.flightNo,
         airline: flight.airlineName,
         source: flight.fromLocation,
@@ -49,20 +46,19 @@ const FlightSearch = () => {
         prices: {
           economy: flight.economyFare,
           business: flight.businessFare,
-          firstClass: flight.firstFare
+          firstClass: flight.firstFare,
         },
         seatsAvailable: {
           economy: flight.availableEconomySeats,
           business: flight.availableBusinessSeats,
-          firstClass: flight.availableFirstSeats
-        }
+          firstClass: flight.availableFirstSeats,
+        },
       }));
 
       navigate('/customer/flightlist', { state: { flights: transformedFlights } });
-
     } catch (error) {
-      alert("Failed to fetch flights. Please try again.");
-      console.error("Flight search error:", error);
+      alert('Failed to fetch flights. Please try again.');
+      console.error('Flight search error:', error);
     } finally {
       setIsSearching(false);
     }
@@ -82,8 +78,8 @@ const FlightSearch = () => {
               <div className="form-group">
                 <div className="input-container">
                   <label>From</label>
-                  <input 
-                    type="text" 
+                  <input
+                    type="text"
                     placeholder="Enter departure city"
                     value={from}
                     onChange={(e) => setFrom(e.target.value)}
@@ -96,8 +92,8 @@ const FlightSearch = () => {
               <div className="form-group">
                 <div className="input-container">
                   <label>To</label>
-                  <input 
-                    type="text" 
+                  <input
+                    type="text"
                     placeholder="Enter destination city"
                     value={to}
                     onChange={(e) => setTo(e.target.value)}
@@ -107,31 +103,27 @@ const FlightSearch = () => {
                 </div>
               </div>
 
-
-            <div className="form-group">
-              <div className="input-container">
-                <label>Departure Date</label>
-                <input 
-                  type="date" 
-                  value={departureDate}
-                  onChange={(e) => setDepartureDate(e.target.value)}
-                  className="booking-input"
-                  required
-                  min={new Date().toISOString().split('T')[0]}
-                />
-
+              <div className="form-group">
+                <div className="input-container">
+                  <label>Departure Date</label>
+                  <input
+                    type="date"
+                    value={departureDate}
+                    onChange={(e) => setDepartureDate(e.target.value)}
+                    className="booking-input"
+                    required
+                    min={new Date().toISOString().split('T')[0]}
+                  />
+                </div>
               </div>
             </div>
 
-          <button 
-            type="submit" 
-            className="search-btn"
-            disabled={isSearching}
-          >
-            <FaSearch className="search-icon" />
-            {isSearching ? 'Searching...' : 'Search Flights'}
-          </button>
-        </form>
+            <button type="submit" className="search-btn" disabled={isSearching}>
+              <FaSearch className="search-icon" />
+              {isSearching ? 'Searching...' : 'Search Flights'}
+            </button>
+          </form>
+        </div>
       </div>
     </div>
   );
