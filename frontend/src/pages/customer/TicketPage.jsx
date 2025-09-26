@@ -574,7 +574,6 @@ const TicketPage = () => {
   if (loading) {
     return (
       <div className="ticket-page">
-        <HomeNavbar />
         <div className="ticket-container">
           <div className="loading-spinner">
             <FaSpinner className="spinner-icon" />
