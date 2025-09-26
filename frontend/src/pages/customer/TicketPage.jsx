@@ -13,7 +13,7 @@ import {
   sendBookingConfirmationEmail, 
   //generateTicketPDF 
 } from '../../services/customerService/ticketService';
-import '../../CSS/TicketPage.css';
+import '../../css/TicketPage.css';
 
 const TicketPage = () => {
   const location = useLocation();
