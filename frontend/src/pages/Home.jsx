@@ -1,7 +1,7 @@
 import React from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import HomeNavbar from '../components/HomeNavbar';
-import '../CSS/Home.css';
+import '../css/Home.css';
 import FlightSearch from './customer/FlightSearch';
 
 function Home() {
